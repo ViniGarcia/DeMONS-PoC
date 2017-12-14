@@ -1,7 +1,7 @@
 import sys
 from os import path
-from VGuardFA import VGuardFA
-from VGuardFAS import VGuardFAS
+from VGuard import VGuardFA
+from DeMONS import VGuardFAS
 from MethodsSimulator import MethodsSimulator
 
 def help():
