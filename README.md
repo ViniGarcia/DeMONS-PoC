@@ -5,41 +5,39 @@ DeMONS: DDoS MitigatiOn NFV Solution
 
 ### What is DeMONS?
 
-DeMONS is a DDoS mitigation solution that uses NFV concept together both a dynamic allocation and a reputation mechanisms. This repository provides a DeMONS simulator for measuring satisfaction (i.e., a QoS metric calculated by using the traffic drop rate and flows priorities) in differente traffic scenarios. In addition to the DeMONS simulator, we also provide a VGuard solution simulator [1] to be used as the baseline for comparison. <br/>
+DeMONS is a DDoS mitigation solution that uses NFV concept together both a dynamic allocation and a reputation mechanisms. This repository provides a DeMONS simulator for measuring satisfaction (i.e., a QoS metric calculated by using the traffic drop rate and flows priorities) in differente traffic scenarios. In addition to the DeMONS simulator, we also provide a VGuard solution simulator [1] to be used as the baseline for comparison. This simulator was developed by using python 2.7 language.<br/>
 
 The DeMONS simulator can be controlled by its CLI (CLI.py). This interface provides five actions as described below:<br/>
 <br/>
 flow -> create a simulation flow summary<br/>
-- arguments for normal flows: file distribution<br/>
-- arguments for DDoS flows: file benign_distribution ddos_distribution ddos_start_moment<br/>
+arguments for normal flows: file distribution<br/>
+arguments for DDoS flows: file benign_distribution ddos_distribution ddos_start_moment<br/>
 -- file: string (file where the data will be written)<br/>
 -- distributions: N100/30-1, N100/30-2, N500/30, D500/10 (data distribution equation)<br/>
 -- ddos_start_moment: integer (time when the DDoS starts)(<br/>
 <br/>
 vguard -> execute a VGuard solution simulation<br/>
-- arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode<br/>
+arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode<br/>
 -- flow_file: string (flow file formatted as the one created by flow action)<br/>
 -- tunnel_low_cap: integer (capacity of low priority tunnel in Kbps)<br/>
 -- tunnel_high_cap: integer (capacity of high priority tunnel in Kbps)<br/>
 -- selective_mode: float (>= 0 and <= 1) (selective mode entrance parameter)<br/>
 <br/>
 demons -> execute a DeMONS solution simulation<br/>
-- arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode<br/>
+arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode<br/>
 -- flow_file: string (flow file formatted as the one created by flow action)<br/>
 -- tunnel_low_cap: integer (capacity of low priority tunnel in Kbps)<br/>
 -- tunnel_high_cap: integer (capacity of high priority tunnel in Kbps)<br/>
 -- selective_mode: float (>= 0 and <= 1) (selective mode entrance parameter)<br/>
 <br/>
 full -> execute both VGuad and DeMONS simulations<br/>
-- arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode<br/>
+arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode<br/>
 -- flow_file: string (flow file formatted as the one created by flow action)<br/>
 -- tunnel_low_cap: integer (capacity of low priority tunnel in Kbps)<br/>
 -- tunnel_high_cap: integer (capacity of high priority tunnel in Kbps)<br/>
 -- selective_mode: float (>= 0 and <= 1) (selective mode entrance parameter)<br/>
 <br/>
 exit -> end simulator<br/>
-
-The NIEP platform was developed using python 2.7 language.
 
 ### Next Steps
 
@@ -60,7 +58,7 @@ Carlos Raniery Paula dos Santos (csantos@inf.ufsm.br) - UFSM, Brazil <br/>
 ### Publications
 
 V. F. Garcia et al., "Uma Solução para Mitigação de Ataques DDoS Através de Tecnologia NFV", 2018 1st Workshop de Segurança Cibernética em Dispositivos Conectados (WSCDC SBRC). Campos do Jordão, Brazil, 2018.
-<br/>
+<br/><br/>
 V. Fülber Garcia, G. de Freitas Gaiardo, L. da Cruz Marcuzzo, R. Ceretta Nunes and C. R. Paula dos Santos, "DeMONS: A DDoS Mitigation NFV Solution," 2018 IEEE 32nd International Conference on Advanced Information Networking and Applications (AINA), Krakow, 2018, pp. 769-776. doi: 10.1109/AINA.2018.00115
 
 ### References
