@@ -50,7 +50,7 @@ Contact us towards git issues requests or by the e-mail vfulber@inf.ufsm.br.
 
 ### DeMONS Research Group
 
-Vinícius Fülber Garcia (vfulber@inf.ufsm.br) - UFSM, Brazil <br/>
+Vinícius Fülber Garcia (vfulber@inf.ufsm.br) - UFPR, Brazil <br/>
 Guilherme de Freitas Gaiardo (ggaiardo@inf.ufsm.br) - UFSM, Brazil <br/>
 Raul Ceretta Nunes (ceretta@inf.ufsm.br) - UFSM, Brazil <br/>
 Carlos Raniery Paula dos Santos (csantos@inf.ufsm.br) - UFSM, Brazil <br/>
