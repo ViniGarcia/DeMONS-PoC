@@ -1,5 +1,7 @@
 import math
 
+import Filters
+
 class VGuard:
 #tunnelLowFlows - ordered list of triples (flowPritority, flowIntensity flowID)
 #tunnelHighFlows - ordered list of triples (flowPritority, flowIntensity, flowID)
@@ -74,25 +76,4 @@ class VGuard:
                         self.tunnelLowSum += flowPriority
 
     def tunnelLowFilter(self):
-        self.tunnelLowDrop = {}
-        self.tunnelLowDropRate = 0
-
-        if self.tunnelLowUse > self.tunnelLowCapacity:
-            tunnelDropRate = self.tunnelLowUse - self.tunnelLowCapacity
-            totalTunnelDrop = self.tunnelLowUse - self.tunnelLowCapacity
-
-            for flow in self.tunnelLowFlows:
-                #dropFactor = (1-flow[0]) + (flow[0]*0.1)
-                #dropFactor = 1-flow[0]
-                dropFactor = ((1 - flow[0]) + (((1 - flow[0]) + (flow[0] * 0.1)) * (tunnelDropRate / totalTunnelDrop)))
-                if dropFactor > 1:
-                    dropFactor = 1
-                flowDrop = flow[1] * dropFactor
-                if flowDrop < tunnelDropRate:
-                    self.tunnelLowDrop[flow[2]] = round(flowDrop, 0)
-                    tunnelDropRate -= flowDrop
-                    self.tunnelLowDropRate += flowDrop
-                else:
-                    self.tunnelLowDrop[flow[2]] = round(tunnelDropRate,0)
-                    self.tunnelLowDropRate += tunnelDropRate
-                    break
+        Filters.vguardStandard(self)

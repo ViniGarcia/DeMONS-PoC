@@ -1,6 +1,8 @@
 import bisect
 import copy
 
+import Filters
+
 class DeMONS:
 #tunnelLowFlows - ordered list of triples (flowPritority, flowIntensity flowID)
 #tunnelHighFlows - ordered list of triples (flowPritority, flowIntensity, flowID)
@@ -125,26 +127,4 @@ class DeMONS:
                         self.tunnelLowSum += flowPriority
 
     def tunnelLowFilter(self):
-        if self.tunnelLowUse > self.tunnelLowCapacity:
-            tunnelDropRate = self.tunnelLowUse - self.tunnelLowCapacity
-            totalTunnelDrop = self.tunnelLowUse - self.tunnelLowCapacity
-            self.tunnelLowDrop = {}
-            self.tunnelLowDropRate = 0
-            for flow in self.tunnelLowFlows:
-                #dropFactor = (1-flow[0]) + (flow[0]*0.1)
-                #dropFactor = 1-flow[0]
-                dropFactor = ((1 - flow[0]) + (((1 - flow[0]) + (flow[0] * 0.1)) * (tunnelDropRate / totalTunnelDrop)))
-                if dropFactor > 1:
-                    dropFactor = 1
-                flowDrop = flow[1] * dropFactor
-                if flowDrop < tunnelDropRate:
-                    self.tunnelLowDrop[flow[2]] = round(flowDrop, 0)
-                    tunnelDropRate -= flowDrop
-                    self.tunnelLowDropRate += flowDrop
-                else:
-                    self.tunnelLowDrop[flow[2]] = round(tunnelDropRate,0)
-                    self.tunnelLowDropRate += tunnelDropRate
-                    break
-        else:
-            self.tunnelLowDrop = {}
-            self.tunnelLowDropRate = 0
+        Filters.demonsStandard(self)
