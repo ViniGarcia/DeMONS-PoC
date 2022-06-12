@@ -6,35 +6,47 @@ class VGuard:
 #   flowPriority - float number (0 ~ 1)
 #   flowIntensity - integer
 #   flowID - string
-    tunnelLowFlows = []
-    tunnelHighFlows = []
+    tunnelLowFlows = None
+    tunnelHighFlows = None
 
 #tunnelLowUse - bandwidth use of low tunnel (integer)
 #tunnelHighUse - bandwidth use of high tunnel (integer)
-    tunnelLowUse = 0
-    tunnelHighUse = 0
+    tunnelLowUse = None
+    tunnelHighUse = None
 
 #tunnelLowUse - bandwidth capacity of low tunnel (integer)
 #tunnelHighUse - bandwidth capacity of high tunnel (integer)
-    tunnelLowCapacity = 0
-    tunnelHighCapacity = 0
+    tunnelLowCapacity = None
+    tunnelHighCapacity = None
 
 #tunnelHighNormal - normal bandwidth use of high tunnel (float 0 ~ 1)
 #tunnelHighSum - priorities sum from tunnelHighFlows
 #tunnelLowPrioritySum - priorities sum from tunnelLowFlows
-    tunnelHighNormal = 0
-    tunnelHighSum = 0
-    tunnelLowSum = 0
+    tunnelHighNormal = None
+    tunnelHighSum = None
+    tunnelLowSum = None
 
 #tunnelLowDrop - traffic drop by tunnel low filter for each flow (integer)
 #tunnelLowDropRate - total traffic dropped vy the filter (integer)
-    tunnelLowDrop = {}
-    tunnelLowDropRate = 0
+    tunnelLowDrop = None
+    tunnelLowDropRate = None
 
     def __init__(self, lowCapacity, highCapacity, highNormal):
         self.tunnelLowCapacity = lowCapacity
         self.tunnelHighCapacity = highCapacity
         self.tunnelHighNormal = highNormal
+
+        self.tunnelLowFlows = []
+        self.tunnelHighFlows = []
+
+        self.tunnelLowUse = 0
+        self.tunnelHighUse = 0
+
+        self.tunnelLowSum = 0
+        self.tunnelHighSum = 0
+
+        self.tunnelLowDrop = {}
+        self.tunnelLowDropRate = 0
 
     def flowAllocation(self, flowID, flowPriority, flowIntensity, flowType):
         if self.tunnelLowUse < self.tunnelHighUse:

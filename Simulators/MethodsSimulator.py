@@ -2,7 +2,7 @@ from sys import path
 from math import pow
 
 path.insert(0, '../Solutions/')
-from VGuard import VGuard
+from VGuard import VGuard   
 from DeMONS import DeMONS
 
 class MethodsSimulator:
@@ -37,15 +37,19 @@ class MethodsSimulator:
                         flow[0] = flowPriority
                 return
 
-        if isinstance(testMethod, DeMONS):
-            testMethod.selectiveFlowAllocation(flowID, flowPriority, flowIntensity, flowType)
-        else:
-            if isinstance(testMethod, VGuard):
-                testMethod.flowAllocation(flowID, flowPriority, flowIntensity, flowType)
+        if flowIntensity != 0:
+            if isinstance(testMethod, DeMONS):
+                testMethod.selectiveFlowAllocation(flowID, flowPriority, flowIntensity, flowType)
+            else:
+                if isinstance(testMethod, VGuard):
+                    testMethod.flowAllocation(flowID, flowPriority, flowIntensity, flowType)
 
 
     def lowTunnelSatisfaction(self, testMethod):
-        dropRate = 1 - min(1, testMethod.tunnelLowCapacity/testMethod.tunnelLowUse)
+        if testMethod.tunnelLowUse != 0:
+            dropRate = 1 - min(1, testMethod.tunnelLowCapacity/testMethod.tunnelLowUse)
+        else:
+            dropRate = 0
         satisfaction = pow((1 - dropRate),2)
         maxSatisfaction = 0
         currentSatisfaction = 0
@@ -58,7 +62,10 @@ class MethodsSimulator:
 
 
     def lowFilteredTunnelSatisfaction(self, testMethod):
-        dropRate = 1 - min(1, testMethod.tunnelLowCapacity/(testMethod.tunnelLowUse - testMethod.tunnelLowDropRate))
+        if testMethod.tunnelLowUse != 0:
+            dropRate = 1 - min(1, testMethod.tunnelLowCapacity/(testMethod.tunnelLowUse - testMethod.tunnelLowDropRate))
+        else:
+            dropRate = 0
         satisfaction = pow((1 - dropRate),2)
         maxSatisfaction = 0
         currentSatisfaction = 0
@@ -78,7 +85,10 @@ class MethodsSimulator:
 
 
     def highTunnelSatisfaction(self, testMethod):
-        dropRate = 1 - min(1, testMethod.tunnelHighCapacity/testMethod.tunnelHighUse)
+        if testMethod.tunnelHighUse != 0:
+            dropRate = 1 - min(1, testMethod.tunnelHighCapacity/testMethod.tunnelHighUse)
+        else:
+            dropRate = 0
         satisfaction = pow((1 - dropRate),2)
         maxSatisfaction = 0
         currentSatisfaction = 0
@@ -137,8 +147,15 @@ class MethodsSimulator:
         tunnelHighAtacks = 0
         tunnelHighAttackTraffic = 0
 
-        passRate = min(1, testMethod.tunnelLowCapacity / testMethod.tunnelLowUse)
-        filteredPassRate = min(1, testMethod.tunnelLowCapacity / (testMethod.tunnelLowUse - testMethod.tunnelLowDropRate))
+        if testMethod.tunnelLowUse != 0:
+            passRate = min(1, testMethod.tunnelLowCapacity / testMethod.tunnelLowUse)
+        else:
+            passRate = 1
+
+        if testMethod.tunnelLowUse != 0:
+            filteredPassRate = min(1, testMethod.tunnelLowCapacity / (testMethod.tunnelLowUse - testMethod.tunnelLowDropRate))
+        else:
+            filteredPassRate = 1
 
         for flow in testMethod.tunnelLowFlows:
             if flow[3] == '\'A\'':
@@ -152,7 +169,10 @@ class MethodsSimulator:
                     filteredBenignLowPassRate += flow[1] * filteredPassRate
                 benignLowTraffic += flow[1]
 
-        passRate = min(1, testMethod.tunnelHighCapacity / testMethod.tunnelHighUse)
+        if testMethod.tunnelHighUse != 0:
+            passRate = min(1, testMethod.tunnelHighCapacity / testMethod.tunnelHighUse)
+        else:
+            passRate = 1
         for flow in testMethod.tunnelHighFlows:
             if flow[3] == '\'A\'':
                 tunnelHighAtacks += 1
@@ -166,21 +186,26 @@ class MethodsSimulator:
         print('Tunnel Low Attacaks Traffic: ' + str(tunnelLowAtackTraffic))
         print('Tunnel High Attacks: ' + str(tunnelHighAtacks))
         print('Tunnel High Attacks Traffic: ' + str(tunnelHighAttackTraffic))
-        print('Benign Pass Rate: ' + str((benignLowPassRate + benignHighPassRate)/(benignLowTraffic + benignHighTraffic)))
-        print('Filtered Benign Pass Rate: ' + str((filteredBenignLowPassRate + benignHighPassRate)/(benignLowTraffic + benignHighTraffic)))
+        if benignLowTraffic != 0 or benignHighTraffic != 0:
+            print('Benign Pass Rate: ' + str((benignLowPassRate + benignHighPassRate)/(benignLowTraffic + benignHighTraffic)))
+            print('Filtered Benign Pass Rate: ' + str((filteredBenignLowPassRate + benignHighPassRate)/(benignLowTraffic + benignHighTraffic)))
+        else:
+            print('Benign Pass Rate: 0')
+            print('Filtered Benign Pass Rate: 0')
         print('==========================================================')
 
     def simulationBySecond(self, trafficFilePath, testMethod):
         seconds = 1
-        input = open(trafficFilePath, 'r')
-        trafficFile = input.readlines()
+        inputData = open(trafficFilePath, 'r')
+        trafficFile = inputData.readlines()
+        inputData.close()
 
         for data in trafficFile:
             if data.startswith('['):
                 parsedData = (data[1:len(data) - 2]).replace(' ', '').split(',')
                 self.trafficHistoryInsert(int(parsedData[0]), float(parsedData[2]), int(parsedData[1]), parsedData[3], testMethod)
             else:
-                if data != '\n':
+                if data != '\r\n' and data != '\n':
                     print('Second: ' + str(seconds) + ' Traffic: ' + str(data.replace('\n', '')))
                     seconds += 1
                 else:

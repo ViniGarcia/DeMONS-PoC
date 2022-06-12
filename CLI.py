@@ -112,11 +112,11 @@ class SimulationCLI(Cmd):
 			if not path.isfile(arguments[0]):
 				print('INVALID FILE!!')
 				return
-
+ 
 			print('=========================== VGUARD TEST START ==========================\n')
-	    	self.methods.simulationBySecond(arguments[0], VGuard(int(arguments[1]), int(arguments[2]), float(arguments[3])))
-	    	print('============================ VGUARD TEST END ===========================\n')
-	    	return
+			self.methods.simulationBySecond(arguments[0], VGuard(int(arguments[1]), int(arguments[2]), float(arguments[3])))
+			print('============================ VGUARD TEST END ===========================\n')
+			return
 
 		print('INVALID ARGUMENTS!!')
 		return
@@ -147,9 +147,8 @@ class SimulationCLI(Cmd):
 				return
 
 			print('============================ DEMONS TEST START ==========================\n')
-    		self.methods.simulationBySecond(arguments[0], DeMONS(int(arguments[1]), int(arguments[2]), float(arguments[3])))
-    		print('============================= DEMONS TEST END ===========================\n')
-
+			self.methods.simulationBySecond(arguments[0], DeMONS(int(arguments[1]), int(arguments[2]), float(arguments[3])))
+			print('============================= DEMONS TEST END ===========================\n')
 	def do_full(self, args):
 
 		self.do_vguard(args)
@@ -159,7 +158,8 @@ class SimulationCLI(Cmd):
 	def do_exit(self, args):
 
 		exit()
-
+		
 
 if __name__ == '__main__':
+
 	SimulationCLI().cmdloop()

@@ -7,38 +7,51 @@ class DeMONS:
 #   flowPriority - float number (0 ~ 1)
 #   flowIntensity - integer
 #   flowID - string
-    tunnelLowFlows = []
-    tunnelHighFlows = []
+    tunnelLowFlows = None
+    tunnelHighFlows = None
 
 #tunnelLowUse - bandwidth use of low tunnel (integer)
 #tunnelHighUse - bandwidth use of high tunnel (integer)
 #lastTunnelHighUse - trigger for balance (integer)
-    tunnelLowUse = 0
-    tunnelHighUse = 0
-    lastTunnelHighUse = 0
+    tunnelLowUse = None
+    tunnelHighUse = None
+    lastTunnelHighUse = None
 
 #tunnelLowUse - bandwidth capacity of low tunnel (integer)
 #tunnelHighUse - bandwidth capacity of high tunnel (integer)
-    tunnelLowCapacity = 0
-    tunnelHighCapacity = 0
+    tunnelLowCapacity = None
+    tunnelHighCapacity = None
 
 #tunnelHighNormal - normal bandwidth use of high tunnel (float 0 ~ 1)
-    tunnelHighNormal = 0
+    tunnelHighNormal = None
 
 #tunnelLowSum - priorities sum form low tunnel (float)
 #tunnelHighSum - priorities sum from high tunnel (float)
-    tunnelLowSum = 0
-    tunnelHighSum = 0
+    tunnelLowSum = None
+    tunnelHighSum = None
 
 #tunnelLowDrop - traffic drop by tunnel low filter for each flow (integer)
 #tunnelLowDropRate - total traffic dropped vy the filter (integer)
-    tunnelLowDrop = {}
-    tunnelLowDropRate = 0
+    tunnelLowDrop = None
+    tunnelLowDropRate = None
 
     def __init__(self, lowCapacity, highCapacity, highNormal):
         self.tunnelLowCapacity = lowCapacity
         self.tunnelHighCapacity = highCapacity
         self.tunnelHighNormal = highNormal
+
+        self.tunnelLowFlows = []
+        self.tunnelHighFlows = []
+
+        self.tunnelLowUse = 0
+        self.tunnelHighUse = 0
+        self.lastTunnelHighUse = 0
+
+        self.tunnelLowSum = 0
+        self.tunnelHighSum = 0
+
+        self.tunnelLowDrop = {}
+        self.tunnelLowDropRate = 0
 
     def condicionalAllocation(self, flowTriple):
         flowFree = self.tunnelHighCapacity - self.tunnelHighUse
