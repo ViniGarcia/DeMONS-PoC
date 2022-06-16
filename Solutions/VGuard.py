@@ -33,7 +33,10 @@ class VGuard:
     tunnelLowDrop = None
     tunnelLowDropRate = None
 
-    def __init__(self, lowCapacity, highCapacity, highNormal):
+#schedulerData - queue for traffic shapping (not used for policing)
+    schedulerData = None
+
+    def __init__(self, lowCapacity, highCapacity, highNormal, schedulerQueue = 0):
         self.tunnelLowCapacity = lowCapacity
         self.tunnelHighCapacity = highCapacity
         self.tunnelHighNormal = highNormal
@@ -49,6 +52,8 @@ class VGuard:
 
         self.tunnelLowDrop = {}
         self.tunnelLowDropRate = 0
+
+        self.schedulerData = [schedulerQueue, 0, []]
 
     def flowAllocation(self, flowID, flowPriority, flowIntensity, flowType):
         if self.tunnelLowUse < self.tunnelHighUse:
@@ -77,3 +82,5 @@ class VGuard:
 
     def tunnelLowFilter(self):
         Filters.vguardStandard(self)
+        #Filters.tokenBucketPolicer(self, self.tunnelLowCapacity)
+        #Filters.leakyBucketShapper(self, self.tunnelLowCapacity)

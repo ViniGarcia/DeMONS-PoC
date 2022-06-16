@@ -37,7 +37,10 @@ class DeMONS:
     tunnelLowDrop = None
     tunnelLowDropRate = None
 
-    def __init__(self, lowCapacity, highCapacity, highNormal):
+#schedulerData - queue for traffic shapping (not used for policing)
+    schedulerData = None
+
+    def __init__(self, lowCapacity, highCapacity, highNormal, schedulerQueue = 0):
         self.tunnelLowCapacity = lowCapacity
         self.tunnelHighCapacity = highCapacity
         self.tunnelHighNormal = highNormal
@@ -54,6 +57,8 @@ class DeMONS:
 
         self.tunnelLowDrop = {}
         self.tunnelLowDropRate = 0
+
+        self.schedulerData = [schedulerQueue, 0, []]
 
     def condicionalAllocation(self, flowTriple):
         flowFree = self.tunnelHighCapacity - self.tunnelHighUse
@@ -127,4 +132,7 @@ class DeMONS:
                         self.tunnelLowSum += flowPriority
 
     def tunnelLowFilter(self):
-        Filters.demonsStandard(self)
+        #Filters.demonsStandard(self)
+        #Filters.tokenBucketPolicer(self, self.tunnelLowCapacity)
+        #Filters.leakyBucketShapper(self, self.tunnelLowCapacity)
+        Filters.leakyBucketPriorityShapper(self, self.tunnelLowCapacity)

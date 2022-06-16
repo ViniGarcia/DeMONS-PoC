@@ -107,14 +107,14 @@ class MethodsSimulator:
 
         print('====================== BASIC REPORT ======================')
         print('Low Tunnel Flows Amount: ' + str(len(testMethod.tunnelLowFlows)))
-        print('Low Tunnel Flows Priority Sum: ' + str(testMethod.tunnelLowSum))
+        print('Low Tunnel Flows Priority Sum: ' + str(abs(round(testMethod.tunnelLowSum, 4))))
         print('Low Tunnel Crossing Traffic: ' + str(testMethod.tunnelLowUse))
         print('Low Tunnel Current Satisfaction: ' + str(lowSatisfaction[0]))
         print('Low Tunnel Filtered Satisfaction: ' + str(lowFilteredSatisfaction[0]))
         print('Low Tunnel Filtered Maximum Satisfaction: ' + str(lowFilteredSatisfaction[1]))
         print('Low Tunnel Maximum Satisfaction: ' + str(lowSatisfaction[1]))
         print('High Tunnel Flows Amount: ' + str(len(testMethod.tunnelHighFlows)))
-        print('High Tunnel Flows Priority Sum: ' + str(testMethod.tunnelHighSum))
+        print('High Tunnel Flows Priority Sum: ' + str(abs(round(testMethod.tunnelHighSum, 4))))
         print('High Tunnel Crossing Traffic: ' + str(testMethod.tunnelHighUse))
         print('High Tunnel Current Satisfaction: ' + str(highSatisfaction[0]))
         print('High Tunnel Maximum Satisfaction: ' + str(highSatisfaction[1]))
@@ -194,7 +194,7 @@ class MethodsSimulator:
             print('Filtered Benign Pass Rate: 0')
         print('==========================================================')
 
-    def simulationBySecond(self, trafficFilePath, testMethod):
+    def simulationBySecond(self, trafficFilePath, testMethod, reportInterval = 1):
         seconds = 1
         inputData = open(trafficFilePath, 'r')
         trafficFile = inputData.readlines()
@@ -210,6 +210,7 @@ class MethodsSimulator:
                     seconds += 1
                 else:
                     testMethod.tunnelLowFilter()
-                    self.generateBasicReport(testMethod)
-                    self.generateDDoSReport(testMethod)
+                    if ((seconds-2) % reportInterval) == 0:
+                        self.generateBasicReport(testMethod)
+                        self.generateDDoSReport(testMethod)
                     print('\n')
