@@ -1,16 +1,19 @@
 import copy
 import math
 
-def demonsStandard(testMethod):
+def demonsStandard(testMethod, policy):
 	if testMethod.tunnelLowUse > testMethod.tunnelLowCapacity:
 		tunnelDropRate = testMethod.tunnelLowUse - testMethod.tunnelLowCapacity
 		totalTunnelDrop = testMethod.tunnelLowUse - testMethod.tunnelLowCapacity
 		testMethod.tunnelLowDrop = {}
 		testMethod.tunnelLowDropRate = 0
 		for flow in testMethod.tunnelLowFlows:
-			#dropFactor = (1-flow[0]) + (flow[0]*0.1)
-			#dropFactor = 1-flow[0]
-			dropFactor = ((1 - flow[0]) + (((1 - flow[0]) + (flow[0] * 0.1)) * (tunnelDropRate / totalTunnelDrop)))
+			if policy == 0:
+				dropFactor = ((1 - flow[0]) + (((1 - flow[0]) + (flow[0] * 0.1)) * (tunnelDropRate / totalTunnelDrop)))
+			elif policy == 1:
+				dropFactor = (1-flow[0]) + (flow[0]*0.1)
+			else:
+				dropFactor = 1-flow[0]
 			if dropFactor > 1:
 				dropFactor = 1
 			flowDrop = flow[1] * dropFactor
@@ -27,7 +30,7 @@ def demonsStandard(testMethod):
 		testMethod.tunnelLowDropRate = 0
 
 
-def vguardStandard(testMethod):
+def vguardStandard(testMethod, policy):
 	testMethod.tunnelLowDrop = {}
 	testMethod.tunnelLowDropRate = 0
 
@@ -36,9 +39,12 @@ def vguardStandard(testMethod):
 		totalTunnelDrop = testMethod.tunnelLowUse - testMethod.tunnelLowCapacity
 
 		for flow in testMethod.tunnelLowFlows:
-			#dropFactor = (1-flow[0]) + (flow[0]*0.1)
-			#dropFactor = 1-flow[0]
-			dropFactor = ((1 - flow[0]) + (((1 - flow[0]) + (flow[0] * 0.1)) * (tunnelDropRate / totalTunnelDrop)))
+			if policy == 0:
+				dropFactor = ((1 - flow[0]) + (((1 - flow[0]) + (flow[0] * 0.1)) * (tunnelDropRate / totalTunnelDrop)))
+			elif policy == 1:
+				dropFactor = (1-flow[0]) + (flow[0]*0.1)
+			else:
+				dropFactor = 1-flow[0]
 			if dropFactor > 1:
 				dropFactor = 1
 			flowDrop = flow[1] * dropFactor
@@ -60,10 +66,15 @@ def tokenBucketPolicer(testMethod, burst):
 		dropFactor = (testMethod.tunnelLowUse - burst) / testMethod.tunnelLowUse
 
 		for flow in testMethod.tunnelLowFlows:
+
+			if flow[1] == 0:
+				continue
+
 			flowDrop = flow[1] * dropFactor
 			testMethod.tunnelLowDrop[flow[2]] = round(flowDrop, 0)
 			testMethod.tunnelLowDropRate += flowDrop
 		
+
 
 def leakyBucketShapper(testMethod, rate):
 	testMethod.tunnelLowDrop = {}
@@ -79,19 +90,32 @@ def leakyBucketShapper(testMethod, rate):
 		if queueFactor > 1:
 			queueFactor = 1
 
+		removeFlows = []
 		for flow in testMethod.tunnelLowFlows:
+
 			flowDrop = math.floor(flow[1] * dropFactor)
 			
 			if queueFactor > 0:
 				queueData = copy.deepcopy(flow)
-				queueData[1] = math.floor(flowDrop * queueFactor)
-				testMethod.schedulerData[2].append(queueData)
-				testMethod.schedulerData[1] += queueData[1]
-				flowDrop -= queueData[1]
+				queueData[1] = math.ceil(flowDrop * queueFactor)
+				if queueData[1] != 0 and queueFree >= queueData[1]:
+					testMethod.schedulerData[2].append(queueData)
+					testMethod.schedulerData[1] += queueData[1]
+					flowDrop -= queueData[1]
+					queueFree -= queueData[1]
+
+					flow[1] -= queueData[1]
+					testMethod.tunnelLowUse -= queueData[1]
+					if flow[1] == 0:
+						removeFlows.append(flow)
 
 			if flowDrop > 0:
 				testMethod.tunnelLowDrop[flow[2]] = flowDrop
 				testMethod.tunnelLowDropRate += flowDrop
+
+		for flow in removeFlows:
+			testMethod.tunnelLowFlows.remove(flow)
+			testMethod.tunnelLowSum -= flow[0]
 	else:
 		if testMethod.schedulerData[1] != 0:
 			remainingBandwidth = rate - testMethod.tunnelLowUse
@@ -106,17 +130,18 @@ def leakyBucketShapper(testMethod, rate):
 			else:
 				for flow in testMethod.schedulerData[2]:
 					releasedData = math.floor(flow[1] * passingFactor)
-					testMethod.tunnelLowUse += releasedData
-					testMethod.schedulerData[1] -= releasedData
-					flow[1] -= releasedData
+					if releasedData > 0:
+						testMethod.tunnelLowUse += releasedData
+						testMethod.schedulerData[1] -= releasedData
+						flow[1] -= releasedData
 
-					releasedFlow = copy.deepcopy(flow)
-					releasedFlow[1] = releasedData
-					testMethod.tunnelLowFlows.append(releasedFlow)
-					testMethod.tunnelLowSum += releasedFlow[0]
+						releasedFlow = copy.deepcopy(flow)
+						releasedFlow[1] = releasedData
+						testMethod.tunnelLowFlows.append(releasedFlow)
+						testMethod.tunnelLowSum += releasedFlow[0]
 
 
-def leakyBucketPriorityShapper(testMethod, rate):
+def leakyBucketPriorityShapper(testMethod, rate, policy):
 	testMethod.tunnelLowDrop = {}
 	testMethod.tunnelLowDropRate = 0
 
@@ -126,14 +151,18 @@ def leakyBucketPriorityShapper(testMethod, rate):
 		tunnelDropRate = testMethod.tunnelLowUse - rate
 		totalTunnelDrop = testMethod.tunnelLowUse - rate
 
+		removeFlows = []
 		for flow in testMethod.tunnelLowFlows:
 		
 			if tunnelDropRate <= 0:
 				break
 
-			#dropFactor = ((1 - flow[0]) + (((1 - flow[0]) + (flow[0] * 0.1)) * (tunnelDropRate / totalTunnelDrop)))
-			#dropFactor = (1-flow[0]) + (flow[0]*0.1)
-			dropFactor = 1-flow[0]
+			if policy == 0:
+				dropFactor = ((1 - flow[0]) + (((1 - flow[0]) + (flow[0] * 0.1)) * (tunnelDropRate / totalTunnelDrop)))
+			elif policy == 1:
+				dropFactor = (1-flow[0]) + (flow[0]*0.1)
+			else:
+				dropFactor = 1-flow[0]
 			if dropFactor > 1:
 				dropFactor = 1
 			queueFactor = (1 - dropFactor)
@@ -156,10 +185,19 @@ def leakyBucketPriorityShapper(testMethod, rate):
 				queueFree -= queueData[1]
 				tunnelDropRate -= queueData[1]
 
+				flow[1] -= queueData[1]	
+				testMethod.tunnelLowUse -= queueData[1]
+				if flow[1] == 0:
+					removeFlows.append(flow)
+
 			if flowDrop > 0:
 				testMethod.tunnelLowDrop[flow[2]] = flowDrop
 				testMethod.tunnelLowDropRate += flowDrop
 				tunnelDropRate -= flowDrop
+
+		for flow in removeFlows:
+			testMethod.tunnelLowFlows.remove(flow)
+			testMethod.tunnelLowSum -= flow[0]
 	else:
 		if testMethod.schedulerData[1] != 0:
 			remainingBandwidth = rate - testMethod.tunnelLowUse
@@ -174,11 +212,12 @@ def leakyBucketPriorityShapper(testMethod, rate):
 			else:
 				for flow in testMethod.schedulerData[2]:
 					releasedData = math.floor(flow[1] * passingFactor)
-					testMethod.tunnelLowUse += releasedData
-					testMethod.schedulerData[1] -= releasedData
-					flow[1] -= releasedData
+					if releasedData > 0:
+						testMethod.tunnelLowUse += releasedData
+						testMethod.schedulerData[1] -= releasedData
+						flow[1] -= releasedData
 
-					releasedFlow = copy.deepcopy(flow)
-					releasedFlow[1] = releasedData
-					testMethod.tunnelLowFlows.append(releasedFlow)
-					testMethod.tunnelLowSum += releasedFlow[0]
+						releasedFlow = copy.deepcopy(flow)
+						releasedFlow[1] = releasedData
+						testMethod.tunnelLowFlows.append(releasedFlow)
+						testMethod.tunnelLowSum += releasedFlow[0]

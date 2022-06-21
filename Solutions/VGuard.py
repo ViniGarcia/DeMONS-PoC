@@ -80,7 +80,12 @@ class VGuard:
                         self.tunnelLowUse += flowIntensity
                         self.tunnelLowSum += flowPriority
 
-    def tunnelLowFilter(self):
-        Filters.vguardStandard(self)
-        #Filters.tokenBucketPolicer(self, self.tunnelLowCapacity)
-        #Filters.leakyBucketShapper(self, self.tunnelLowCapacity)
+    def tunnelLowFilter(self, mechanism, policy = 0):
+        if mechanism == 0:
+            Filters.vguardStandard(self, policy)
+        elif mechanism == 1:
+            Filters.tokenBucketPolicer(self, self.tunnelLowCapacity)
+        elif mechanism == 2:
+            Filters.leakyBucketShapper(self, self.tunnelLowCapacity)
+        else:
+            Filters.leakyBucketPriorityShapper(self, self.tunnelLowCapacity, policy)

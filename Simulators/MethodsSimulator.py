@@ -1,5 +1,6 @@
 from sys import path
 from math import pow
+from statistics import mean, stdev
 
 path.insert(0, '../Solutions/')
 from VGuard import VGuard   
@@ -100,27 +101,43 @@ class MethodsSimulator:
         return [currentSatisfaction, maxSatisfaction]
 
 
-    def generateBasicReport(self, testMethod):
+    def generateBasicReport(self, testMethod, outputFile = None):
         lowSatisfaction = self.lowTunnelSatisfaction(testMethod)
         lowFilteredSatisfaction = self.lowFilteredTunnelSatisfaction(testMethod)
         highSatisfaction = self.highTunnelSatisfaction(testMethod)
 
-        print('====================== BASIC REPORT ======================')
-        print('Low Tunnel Flows Amount: ' + str(len(testMethod.tunnelLowFlows)))
-        print('Low Tunnel Flows Priority Sum: ' + str(abs(round(testMethod.tunnelLowSum, 4))))
-        print('Low Tunnel Crossing Traffic: ' + str(testMethod.tunnelLowUse))
-        print('Low Tunnel Current Satisfaction: ' + str(lowSatisfaction[0]))
-        print('Low Tunnel Filtered Satisfaction: ' + str(lowFilteredSatisfaction[0]))
-        print('Low Tunnel Filtered Maximum Satisfaction: ' + str(lowFilteredSatisfaction[1]))
-        print('Low Tunnel Maximum Satisfaction: ' + str(lowSatisfaction[1]))
-        print('High Tunnel Flows Amount: ' + str(len(testMethod.tunnelHighFlows)))
-        print('High Tunnel Flows Priority Sum: ' + str(abs(round(testMethod.tunnelHighSum, 4))))
-        print('High Tunnel Crossing Traffic: ' + str(testMethod.tunnelHighUse))
-        print('High Tunnel Current Satisfaction: ' + str(highSatisfaction[0]))
-        print('High Tunnel Maximum Satisfaction: ' + str(highSatisfaction[1]))
-        print('==========================================================')
+        if outputFile == None:
+            print('====================== BASIC REPORT ======================')
+            print('Low Tunnel Flows Amount: ' + str(len(testMethod.tunnelLowFlows)))
+            print('Low Tunnel Flows Priority Sum: ' + str(abs(round(testMethod.tunnelLowSum, 4))))
+            print('Low Tunnel Crossing Traffic: ' + str(testMethod.tunnelLowUse))
+            print('Low Tunnel Current Satisfaction: ' + str(lowSatisfaction[0]))
+            print('Low Tunnel Filtered Satisfaction: ' + str(lowFilteredSatisfaction[0]))
+            print('Low Tunnel Filtered Maximum Satisfaction: ' + str(lowFilteredSatisfaction[1]))
+            print('Low Tunnel Maximum Satisfaction: ' + str(lowSatisfaction[1]))
+            print('High Tunnel Flows Amount: ' + str(len(testMethod.tunnelHighFlows)))
+            print('High Tunnel Flows Priority Sum: ' + str(abs(round(testMethod.tunnelHighSum, 4))))
+            print('High Tunnel Crossing Traffic: ' + str(testMethod.tunnelHighUse))
+            print('High Tunnel Current Satisfaction: ' + str(highSatisfaction[0]))
+            print('High Tunnel Maximum Satisfaction: ' + str(highSatisfaction[1]))
+            print('==========================================================')
+        else:
+            outputFile.write('====================== BASIC REPORT ======================\n')
+            outputFile.write('Low Tunnel Flows Amount: ' + str(len(testMethod.tunnelLowFlows)) + "\n")
+            outputFile.write('Low Tunnel Flows Priority Sum: ' + str(abs(round(testMethod.tunnelLowSum, 4))) + "\n")
+            outputFile.write('Low Tunnel Crossing Traffic: ' + str(testMethod.tunnelLowUse) + "\n")
+            outputFile.write('Low Tunnel Current Satisfaction: ' + str(lowSatisfaction[0]) + "\n")
+            outputFile.write('Low Tunnel Filtered Satisfaction: ' + str(lowFilteredSatisfaction[0]) + "\n")
+            outputFile.write('Low Tunnel Filtered Maximum Satisfaction: ' + str(lowFilteredSatisfaction[1]) + "\n")
+            outputFile.write('Low Tunnel Maximum Satisfaction: ' + str(lowSatisfaction[1]) + "\n")
+            outputFile.write('High Tunnel Flows Amount: ' + str(len(testMethod.tunnelHighFlows)) + "\n")
+            outputFile.write('High Tunnel Flows Priority Sum: ' + str(abs(round(testMethod.tunnelHighSum, 4))) + "\n")
+            outputFile.write('High Tunnel Crossing Traffic: ' + str(testMethod.tunnelHighUse) + "\n")
+            outputFile.write('High Tunnel Current Satisfaction: ' + str(highSatisfaction[0]) + "\n")
+            outputFile.write('High Tunnel Maximum Satisfaction: ' + str(highSatisfaction[1]) + "\n")
+            outputFile.write('==========================================================\n')
 
-    def generateFilterReport(self, testMethod):
+    def generateFilterReport(self, testMethod, outputFile = None):
         priorities = [0]*10
         traffic = [0]*10
 
@@ -128,15 +145,52 @@ class MethodsSimulator:
             priorities[int(flow[0]*10)-1] += 1
             traffic[int(flow[0]*10)-1] += flow[1]
 
-        print('====================== FILTER REPORT ======================')
-        for index in range(0,10):
-            print('Priority: ' + str(index+1) + ' Flow Amount: ' + str(priorities[index]) + ' Traffic: ' + str(traffic[index]))
-        print('Filter Drop Rate: ' + str(testMethod.tunnelLowDropRate))
-        print('After Filter Traffic: ' + str(testMethod.tunnelLowUse - testMethod.tunnelLowDropRate))
-        print('After Filter Tunnel Drop Rate: ' + str((testMethod.tunnelLowUse - testMethod.tunnelLowDropRate)/len(testMethod.tunnelLowFlows)))
-        print('==========================================================')
+        if outputFile == None:
+            print('====================== FILTER REPORT ======================')
+            for index in range(0,10):
+                print('Priority: ' + str(index+1) + ' Flow Amount: ' + str(priorities[index]) + ' Traffic: ' + str(traffic[index]))
+            print('Filter Drop Rate: ' + str(testMethod.tunnelLowDropRate))
+            print('After Filter Traffic: ' + str(testMethod.tunnelLowUse - testMethod.tunnelLowDropRate))
+            print('After Filter Tunnel Drop Rate: ' + str((testMethod.tunnelLowUse - testMethod.tunnelLowDropRate)/len(testMethod.tunnelLowFlows)))
+            print('==========================================================')
+        else:
+            outputFile.write('====================== FILTER REPORT ======================\n')
+            for index in range(0,10):
+                outputFile.write('Priority: ' + str(index+1) + ' Flow Amount: ' + str(priorities[index]) + ' Traffic: ' + str(traffic[index]) + "\n")
+            outputFile.write('Filter Drop Rate: ' + str(testMethod.tunnelLowDropRate) + "\n")
+            outputFile.write('After Filter Traffic: ' + str(testMethod.tunnelLowUse - testMethod.tunnelLowDropRate) + "\n")
+            outputFile.write('After Filter Tunnel Drop Rate: ' + str((testMethod.tunnelLowUse - testMethod.tunnelLowDropRate)/len(testMethod.tunnelLowFlows)) + "\n")
+            outputFile.write('==========================================================\n')
 
-    def generateDDoSReport(self, testMethod):
+    def generateQueueReport(self, testMethod, outputFile = None):
+
+
+        priorities = []
+        traffic = []
+        if testMethod.schedulerData[1] <= 0:
+            priorities += [0.0,0.0]
+            traffic += [0,0]
+        else:
+            for flow in testMethod.schedulerData[2]:
+                traffic.append(flow[1])
+                priorities.append(flow[0])
+
+        if outputFile == None:
+            print('====================== QUEUE REPORT =======================')
+            print('Queued Traffic Total: ' + str(sum(traffic)))
+            print('Queued Flows Priority Total: ' + str(round(sum(priorities), 2)))
+            print('Queued Flows Priority Mean: ' + str(round(mean(priorities), 2)))
+            print('Queued Flows Priority Stdev: ' + str(round(stdev(priorities), 2)))
+            print('==========================================================')
+        else:
+            outputFile.write('====================== QUEUE REPORT =======================\n')
+            outputFile.write('Queued Traffic Total: ' + str(sum(traffic)) + "\n")
+            outputFile.write('Queued Flows Priority Total: ' + str(round(sum(priorities), 2)) + "\n")
+            outputFile.write('Queued Flows Priority Mean: ' + str(round(mean(priorities), 2)) + "\n")
+            outputFile.write('Queued Flows Priority Stdev: ' + str(round(stdev(priorities), 2)) + "\n")
+            outputFile.write('==========================================================\n')
+
+    def generateDDoSReport(self, testMethod, outputFile = None):
         benignLowPassRate = 0
         benignHighPassRate = 0
         filteredBenignLowPassRate = 0
@@ -181,20 +235,34 @@ class MethodsSimulator:
                 benignHighPassRate += flow[1] * passRate
                 benignHighTraffic += flow[1]
 
-        print('======================= DDoS REPORT ======================')
-        print('Tunnel Low Attacks: ' + str(tunnelLowAtacks))
-        print('Tunnel Low Attacaks Traffic: ' + str(tunnelLowAtackTraffic))
-        print('Tunnel High Attacks: ' + str(tunnelHighAtacks))
-        print('Tunnel High Attacks Traffic: ' + str(tunnelHighAttackTraffic))
-        if benignLowTraffic != 0 or benignHighTraffic != 0:
-            print('Benign Pass Rate: ' + str((benignLowPassRate + benignHighPassRate)/(benignLowTraffic + benignHighTraffic)))
-            print('Filtered Benign Pass Rate: ' + str((filteredBenignLowPassRate + benignHighPassRate)/(benignLowTraffic + benignHighTraffic)))
+        if outputFile == None:
+            print('======================= DDoS REPORT ======================')
+            print('Tunnel Low Attacks: ' + str(tunnelLowAtacks))
+            print('Tunnel Low Attacaks Traffic: ' + str(tunnelLowAtackTraffic))
+            print('Tunnel High Attacks: ' + str(tunnelHighAtacks))
+            print('Tunnel High Attacks Traffic: ' + str(tunnelHighAttackTraffic))
+            if benignLowTraffic != 0 or benignHighTraffic != 0:
+                print('Benign Pass Rate: ' + str((benignLowPassRate + benignHighPassRate)/(benignLowTraffic + benignHighTraffic)))
+                print('Filtered Benign Pass Rate: ' + str((filteredBenignLowPassRate + benignHighPassRate)/(benignLowTraffic + benignHighTraffic)))
+            else:
+                print('Benign Pass Rate: 0')
+                print('Filtered Benign Pass Rate: 0')
+            print('==========================================================')
         else:
-            print('Benign Pass Rate: 0')
-            print('Filtered Benign Pass Rate: 0')
-        print('==========================================================')
+            outputFile.write('======================= DDoS REPORT ======================\n')
+            outputFile.write('Tunnel Low Attacks: ' + str(tunnelLowAtacks) + "\n")
+            outputFile.write('Tunnel Low Attacaks Traffic: ' + str(tunnelLowAtackTraffic) + "\n")
+            outputFile.write('Tunnel High Attacks: ' + str(tunnelHighAtacks) + "\n")
+            outputFile.write('Tunnel High Attacks Traffic: ' + str(tunnelHighAttackTraffic) + "\n")
+            if benignLowTraffic != 0 or benignHighTraffic != 0:
+                outputFile.write('Benign Pass Rate: ' + str((benignLowPassRate + benignHighPassRate)/(benignLowTraffic + benignHighTraffic)) + "\n")
+                outputFile.write('Filtered Benign Pass Rate: ' + str((filteredBenignLowPassRate + benignHighPassRate)/(benignLowTraffic + benignHighTraffic)) + "\n")
+            else:
+                outputFile.write('Benign Pass Rate: 0\n')
+                outputFile.write('Filtered Benign Pass Rate: 0\n')
+            outputFile.write('==========================================================\n')
 
-    def simulationBySecond(self, trafficFilePath, testMethod, reportInterval = 1):
+    def simulationBySecond(self, trafficFilePath, testMethod, reportInterval = 1, filterMechanism = 0, filterPolicy = 0, outputFile = None):
         seconds = 1
         inputData = open(trafficFilePath, 'r')
         trafficFile = inputData.readlines()
@@ -207,10 +275,22 @@ class MethodsSimulator:
             else:
                 if data != '\r\n' and data != '\n':
                     print('Second: ' + str(seconds) + ' Traffic: ' + str(data.replace('\n', '')))
+                    if outputFile != None:
+                        outputFile.write('\nSecond: ' + str(seconds) + ' Traffic: ' + str(data.replace('\n', '')) + "\n")
                     seconds += 1
                 else:
-                    testMethod.tunnelLowFilter()
+                    nonQueuedData = len(testMethod.tunnelLowFlows)
+                    testMethod.tunnelLowFilter(filterMechanism, filterPolicy)
+                    
                     if ((seconds-2) % reportInterval) == 0:
-                        self.generateBasicReport(testMethod)
-                        self.generateDDoSReport(testMethod)
+                        self.generateBasicReport(testMethod, outputFile)
+                        self.generateDDoSReport(testMethod, outputFile)
+                        self.generateQueueReport(testMethod, outputFile)
                     print('\n')
+
+                    testMethod.tunnelLowFlows = testMethod.tunnelLowFlows[:nonQueuedData]
+                    testMethod.tunnelLowUse = 0
+                    testMethod.tunnelLowSum = 0
+                    for flow in testMethod.tunnelLowFlows:
+                        testMethod.tunnelLowUse += flow[1]
+                        testMethod.tunnelLowSum += flow[0]

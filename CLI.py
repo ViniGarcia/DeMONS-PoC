@@ -15,16 +15,21 @@ class SimulationCLI(Cmd):
 	prompt = 'simulator> '
 	flows =  FlowSimulator()
 	methods = MethodsSimulator()
+	
+	mechanism = 0
+	policy = 0
 	report = 1
+	output = None
 
 	def do_help(self, args):
 
 		print ('\n############### HELP #################')
 		print ('flow -> create a simulation flow summary')
-		print ('- arguments for normal flows: file distribution')
-		print ('- arguments for DDoS flows: file benign_distribution ddos_distribution ddos_start_moment')
+		print ('- arguments for normal flows: N file distribution')
+		print ('- arguments for peak flows: P file distribution peak_distribution')
+		print ('- arguments for DDoS flows: A file benign_distribution ddos_distribution ddos_start_moment')
 		print ('-- file: string')
-		print ('-- distributions: N100/30-1, N100/30-2, N500/30, D500/10')
+		print ('-- distributions: N100/30-1, N100/30-2, N500/30, D500/10, P20/40/30, P120/150/30, P200/500/30')
 		print ('-- ddos_start_moment: integer')
 		print ('')
 		print ('vguard -> execute a VGuard solution simulation')
@@ -57,32 +62,44 @@ class SimulationCLI(Cmd):
 
 	def do_flow(self, args):
 
-		global getFunction_100_0_30_F1
-		global getFunction_100_0_30_F2
-		global getFunction_500_0_30
-		global getFunctionDDoS_500_10
-
 		if len(args) == 0:
 			return
 
 		arguments = args.split()
 
-		if len(arguments) == 2:
+		if len(arguments) < 3:
+			print('INVALID ARGUMENTS!')
+			return
 
-			if self.flows.flowCreate(arguments[1], str(arguments[0])):
+		if not arguments[0] in ['N', 'P', 'A']:
+			print("INVALID TRAFFIC CREATION MODE!")
+			return
+
+		if arguments[0] == 'N' and len(arguments) == 3:
+
+			if self.flows.flowCreate(arguments[2], str(arguments[1])):
 				print('SUCCESS!!')
 				return
 			else:
 				print('INVALID FLOW ID!!')
 				return
 
-		if len(arguments) == 4:
+		elif arguments[0] == 'A' and len(arguments) == 5:
 			
-			if int(arguments[3]) < 0:
+			if int(arguments[4]) < 0:
 				print('INVALID ATTACK START TIME!!')
 				return
 
-			if self.flows.ddosCreate(arguments[1], arguments[2], int(arguments[3]), str(arguments[0])):
+			if self.flows.ddosCreate(arguments[2], arguments[3], int(arguments[4]), str(arguments[1])):
+				print('SUCCESS!!')
+				return
+			else:
+				print('INVALID FLOW ID!!')
+				return
+
+		elif arguments[0] == 'P' and len(arguments) == 4:
+
+			if self.flows.peakCreate(arguments[2], arguments[3], str(arguments[1])):
 				print('SUCCESS!!')
 				return
 			else:
@@ -127,10 +144,17 @@ class SimulationCLI(Cmd):
 				return
 			else:
 				queue = 0
- 
+ 			
+			self.output = open("[F" + str(self.mechanism) + "-P" + str(self.policy) + "]-" + "VGuard-" + arguments[0] + "-" + arguments[1] + "-" + arguments[2] + "-" + arguments[3] + "-" + str(queue) + ".txt", "w+")
+			
+			if self.output != None:
+				self.output.write('=========================== VGUARD TEST START ==========================\n\n')
 			print('=========================== VGUARD TEST START ==========================\n')
-			self.methods.simulationBySecond(arguments[0], VGuard(int(arguments[1]), int(arguments[2]), float(arguments[3]), queue), self.report)
+			self.methods.simulationBySecond(arguments[0], VGuard(int(arguments[1]), int(arguments[2]), float(arguments[3]), queue), self.report, self.mechanism, self.policy, self.output)
 			print('============================ VGUARD TEST END ===========================\n')
+			if self.output != None:
+				self.output.write('============================ VGUARD TEST END ===========================\n\n')
+				self.output.close()
 			return
 
 		print('MISSING ARGUMENTS!!')
@@ -172,9 +196,17 @@ class SimulationCLI(Cmd):
 			else:
 				queue = 0
 
+			self.output = open("[F" + str(self.mechanism) + "-P" + str(self.policy) + "]-" + "DeMONS-" + arguments[0] + "-" + arguments[1] + "-" + arguments[2] + "-" + arguments[3] + "-" + str(queue) + ".txt", "w+")
+			
+			if self.output != None:
+				self.output.write('============================ DEMONS TEST START ==========================\n\n')
+			
 			print('============================ DEMONS TEST START ==========================\n')
-			self.methods.simulationBySecond(arguments[0], DeMONS(int(arguments[1]), int(arguments[2]), float(arguments[3]), queue), self.report)
+			self.methods.simulationBySecond(arguments[0], DeMONS(int(arguments[1]), int(arguments[2]), float(arguments[3]), queue), self.report, self.mechanism, self.policy, self.output)
 			print('============================= DEMONS TEST END ===========================\n')
+			if self.output != None:
+				self.output.write('============================= DEMONS TEST END ===========================\n\n')
+				self.output.close()
 			return
 
 		print('MISSING ARGUMENTS!!')
@@ -202,6 +234,50 @@ class SimulationCLI(Cmd):
 			return
 
 		self.report = int(arguments[0])
+
+		print("REPORTING INTERVAL SET TO", self.report, "!!\n")
+
+	def do_filter(self, args):
+
+		availableFilters = {0:"STANDARD", 1:"TOKEN BUCKET POLICER", 2:"LEAKY BUCKET SHAPER", 3:"LEAKY BUCKET SHAPER + POLICER"}
+
+		if len(args) == 0:
+			return
+
+		arguments = args.split()
+
+		if len(arguments) != 1:
+			print('UNRECOGNIZED ARGUMENTS!!')
+			return
+
+		if int(arguments[0]) < 0 or int(arguments[0]) > 3:
+			print('INVALID FILTER MECHANISM!!')
+			return
+
+		self.mechanism = int(arguments[0])
+
+		print("FILTER MECHANISM SET TO", availableFilters[self.mechanism], "!!\n")
+
+	def do_policy(self, args):
+
+		availablePolicies = {0:"RESTRICTIVE", 1:"MEDIUM", 2:"PERMISSIVE"}
+
+		if len(args) == 0:
+			return
+
+		arguments = args.split()
+
+		if len(arguments) != 1:
+			print('UNRECOGNIZED ARGUMENTS!!')
+			return
+
+		if int(arguments[0]) < 0 or int(arguments[0]) > 2:
+			print('INVALID FILTER POLICY!!')
+			return
+
+		self.policy = int(arguments[0])
+
+		print("FILTER POLICY SET TO", availablePolicies[self.policy], "!!\n")
 
 	def do_exit(self, args):
 

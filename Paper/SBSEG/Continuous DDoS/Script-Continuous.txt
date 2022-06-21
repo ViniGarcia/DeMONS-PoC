@@ -1,0 +1,17 @@
+filter 0
+policy 0
+demons Normal_100_DDoS_500-30.txt 50000 50000 0.97 10000
+vguard Normal_100_DDoS_500-30.txt 50000 50000 0.97 10000
+policy 2
+demons Normal_100_DDoS_500-30.txt 50000 50000 0.97 10000
+vguard Normal_100_DDoS_500-30.txt 50000 50000 0.97 10000
+filter 2
+demons Normal_100_DDoS_500-30.txt 50000 50000 0.97 10000
+vguard Normal_100_DDoS_500-30.txt 50000 50000 0.97 10000
+filter 3
+policy 0
+demons Normal_100_DDoS_500-30.txt 50000 50000 0.97 10000
+vguard Normal_100_DDoS_500-30.txt 50000 50000 0.97 10000
+policy 2
+demons Normal_100_DDoS_500-30.txt 50000 50000 0.97 10000
+vguard Normal_100_DDoS_500-30.txt 50000 50000 0.97 10000
