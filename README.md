@@ -37,6 +37,18 @@ arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode<br/>
 -- tunnel_high_cap: integer (capacity of high priority tunnel in Kbps)<br/>
 -- selective_mode: float (>= 0 and <= 1) (selective mode entrance parameter)<br/>
 <br/>
+reporting -> define how many seconds passes (in the simulation) to create a report
+arguments: seconds
+-- seconds: int (> 0) [standard value is 1]
+<br/>
+filter -> define which filter to use in the low priority tunnel
+arguments: filter_id
+-- filter_id: int [0: Method Std; 1: Token Bucket Policer; 2: Leaky Bucket Shaper; 3/Std: Leaky Bucket Shaper + Priority Filter]
+<br/>
+policy -> define which policy to use in filter\'s dropping policy [when required]')
+arguments: policy_id
+-- policy_id: int [0: Restrictive; 1: Medium; 2/Std: Permissive]
+<br/>
 exit -> end simulator<br/>
 
 ### Next Steps

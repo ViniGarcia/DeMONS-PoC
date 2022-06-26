@@ -1,6 +1,9 @@
 import copy
 import math
 
+# FUNCTION: demonsStandard
+# Standard DeMONS policer from the first article
+# All the operations modify the attributes of the DeMONS or VGuard class
 def demonsStandard(testMethod, policy):
 	if testMethod.tunnelLowUse > testMethod.tunnelLowCapacity:
 		tunnelDropRate = testMethod.tunnelLowUse - testMethod.tunnelLowCapacity
@@ -30,6 +33,9 @@ def demonsStandard(testMethod, policy):
 		testMethod.tunnelLowDropRate = 0
 
 
+# FUNCTION: vguardStandard
+# Standard VGuard policer from the DeMONS article
+# All the operations modify the attributes of the DeMONS or VGuard class
 def vguardStandard(testMethod, policy):
 	testMethod.tunnelLowDrop = {}
 	testMethod.tunnelLowDropRate = 0
@@ -57,7 +63,8 @@ def vguardStandard(testMethod, policy):
 				testMethod.tunnelLowDropRate += tunnelDropRate
 				break
 
-
+# FUNCTION: tokenBucketPolicer
+# Classic token bucket policer -- it do not work so well in the simulator
 def tokenBucketPolicer(testMethod, burst):
 	testMethod.tunnelLowDrop = {}
 	testMethod.tunnelLowDropRate = 0
@@ -75,7 +82,10 @@ def tokenBucketPolicer(testMethod, burst):
 			testMethod.tunnelLowDropRate += flowDrop
 		
 
-
+# FUNCTION: leakyBucketShapper
+# Classic leaky bucket shaper -- it uses the schedulerData attribute of the VGuard and DeMONS classes.
+# The shaper is working well, but it required some modifications at the MethodsSimulator lass, specifically
+# in the simulationBySecond method
 def leakyBucketShapper(testMethod, rate):
 	testMethod.tunnelLowDrop = {}
 	testMethod.tunnelLowDropRate = 0
@@ -141,6 +151,11 @@ def leakyBucketShapper(testMethod, rate):
 						testMethod.tunnelLowSum += releasedFlow[0]
 
 
+# FUNCTION: leakyBucketPriorityShapper
+# Classic leaky bucket shaper plus a priority-based filter for executing dropping routines (when required)
+# -- it uses the schedulerData attribute of the VGuard and DeMONS classes.
+# The shaper is working well, but it required some modifications at the MethodsSimulator lass, specifically
+# in the simulationBySecond method
 def leakyBucketPriorityShapper(testMethod, rate, policy):
 	testMethod.tunnelLowDrop = {}
 	testMethod.tunnelLowDropRate = 0

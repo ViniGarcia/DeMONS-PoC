@@ -262,6 +262,14 @@ class MethodsSimulator:
                 outputFile.write('Filtered Benign Pass Rate: 0\n')
             outputFile.write('==========================================================\n')
 
+    #METHOD: simulationBySecond
+    # The main method to execute the simulations -- creates a schedule for executing the simulator routines.
+    # It is relevant to note that this method assumes that the "testMethod" class has standard methods (template).
+    # trafficFilePath: a file containing per-second flows data
+    # testMethod: DeMONS or VGuard classes (at the moment) -- it is easy to expand the number of methods (new classes with standard methods)
+    # reportInterval: calculate evaluation metrics at X seconds of the simulation (1 -> second by second; 2 -> 2 by 2 seconds; ...)
+    # filterMechanism: filter mechanism ID for the low priority tunnel [0: Method Std; 1: Token Bucket Policer; 2: Leaky Bucket Shaper; 3..: Leaky Bucket Shaper + Priority Filter]
+    # filterPolicy: filter policy ID (sometimes not required) [0: Restrictive; 1: Medium; 2: Permissive]
     def simulationBySecond(self, trafficFilePath, testMethod, reportInterval = 1, filterMechanism = 0, filterPolicy = 0, outputFile = None):
         seconds = 1
         inputData = open(trafficFilePath, 'r')
@@ -288,6 +296,8 @@ class MethodsSimulator:
                         self.generateQueueReport(testMethod, outputFile)
                     print('\n')
 
+                    # Updating the flows crossing the low priority tunnel by removing the unqueued traffic and recalculating bandwidth usage and priority sum attributes;
+                    # sometimes we do not use shapers to queue flows, but I am not considering it.
                     testMethod.tunnelLowFlows = testMethod.tunnelLowFlows[:nonQueuedData]
                     testMethod.tunnelLowUse = 0
                     testMethod.tunnelLowSum = 0
