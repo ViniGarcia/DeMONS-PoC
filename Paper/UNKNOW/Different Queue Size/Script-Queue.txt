@@ -1,0 +1,14 @@
+filter 3
+policy 0
+demons Normal_100_DDoS_500-30.txt 50000 50000 0.97 20000
+demons Normal_100_DDoS_500-30.txt 50000 50000 0.97 30000
+demons Normal_100_DDoS_500-30.txt 50000 50000 0.97 40000
+demons Normal_100_DDoS_500-30.txt 50000 50000 0.97 50000
+demons Normal_100_DDoS_Int_100-30.txt 50000 50000 0.97 20000
+demons Normal_100_DDoS_Int_100-30.txt 50000 50000 0.97 30000
+demons Normal_100_DDoS_Int_100-30.txt 50000 50000 0.97 40000
+demons Normal_100_DDoS_Int_100-30.txt 50000 50000 0.97 50000
+demons Peaks_100_20_40-30.txt 50000 50000 0.97 20000
+demons Peaks_100_20_40-30.txt 50000 50000 0.97 30000
+demons Peaks_100_20_40-30.txt 50000 50000 0.97 40000
+demons Peaks_100_20_40-30.txt 50000 50000 0.97 50000

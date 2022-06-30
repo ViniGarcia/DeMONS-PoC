@@ -1,0 +1,904 @@
+============================ DEMONS TEST START ==========================
+
+
+Second: 1 Traffic: 13000
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 65
+Low Tunnel Flows Priority Sum: 45.2
+Low Tunnel Crossing Traffic: 6500
+Low Tunnel Current Satisfaction: 4520.0
+Low Tunnel Filtered Satisfaction: 4520.0
+Low Tunnel Filtered Maximum Satisfaction: 4520.0
+Low Tunnel Maximum Satisfaction: 4520.0
+High Tunnel Flows Amount: 65
+High Tunnel Flows Priority Sum: 44.2
+High Tunnel Crossing Traffic: 6500
+High Tunnel Current Satisfaction: 4420.0
+High Tunnel Maximum Satisfaction: 4420.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 0
+Tunnel Low Attacaks Traffic: 0
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 1.0
+Filtered Benign Pass Rate: 1.0
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 0
+Queued Flows Priority Total: 0.0
+Queued Flows Priority Mean: 0.0
+Queued Flows Priority Stdev: 0.0
+==========================================================
+
+Second: 2 Traffic: 1025000
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 9753
+Low Tunnel Flows Priority Sum: 2393.6
+Low Tunnel Crossing Traffic: 925080
+Low Tunnel Current Satisfaction: 645.0367046772409
+Low Tunnel Filtered Satisfaction: 3736.347322619539
+Low Tunnel Filtered Maximum Satisfaction: 220802.00000000102
+Low Tunnel Maximum Satisfaction: 220802.00000000102
+High Tunnel Flows Amount: 510
+High Tunnel Flows Priority Sum: 281.9
+High Tunnel Crossing Traffic: 49920
+High Tunnel Current Satisfaction: 27384.0
+High Tunnel Maximum Satisfaction: 27384.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 9713
+Tunnel Low Attacaks Traffic: 922314
+Tunnel High Attacks: 287
+Tunnel High Attacks Traffic: 28700
+Benign Pass Rate: 0.8909155583979529
+Filtered Benign Pass Rate: 0.9091937088992653
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 1063.6
+Queued Flows Priority Mean: 0.34
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 3 Traffic: 36070
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 3066
+Low Tunnel Flows Priority Sum: 1044.0
+Low Tunnel Crossing Traffic: 48111
+Low Tunnel Current Satisfaction: 18078.69999999991
+Low Tunnel Filtered Satisfaction: 18078.69999999991
+Low Tunnel Filtered Maximum Satisfaction: 18078.69999999991
+Low Tunnel Maximum Satisfaction: 18078.69999999991
+High Tunnel Flows Amount: 356
+High Tunnel Flows Priority Sum: 258.7
+High Tunnel Crossing Traffic: 32290
+High Tunnel Current Satisfaction: 23393.0
+High Tunnel Maximum Satisfaction: 23393.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 2982
+Tunnel Low Attacaks Traffic: 43415
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 1.0
+Filtered Benign Pass Rate: 1.0
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 5669
+Queued Flows Priority Total: 1063.6
+Queued Flows Priority Mean: 0.34
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 4 Traffic: 1046070
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 9974
+Low Tunnel Flows Priority Sum: 2482.0
+Low Tunnel Crossing Traffic: 951839
+Low Tunnel Current Satisfaction: 638.2390807245753
+Low Tunnel Filtered Satisfaction: 3502.984383374086
+Low Tunnel Filtered Maximum Satisfaction: 231297.2000000011
+Low Tunnel Maximum Satisfaction: 231297.2000000011
+High Tunnel Flows Amount: 566
+High Tunnel Flows Priority Sum: 386.4
+High Tunnel Crossing Traffic: 49900
+High Tunnel Current Satisfaction: 33629.0
+High Tunnel Maximum Satisfaction: 33629.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 9896
+Tunnel Low Attacaks Traffic: 946950
+Tunnel High Attacks: 104
+Tunnel High Attacks Traffic: 10400
+Benign Pass Rate: 0.8956457375171462
+Filtered Benign Pass Rate: 0.911171320305461
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 2062.7
+Queued Flows Priority Mean: 0.34
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 5 Traffic: 55070
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 4276
+Low Tunnel Flows Priority Sum: 1524.2
+Low Tunnel Crossing Traffic: 46039
+Low Tunnel Current Satisfaction: 17584.000000000706
+Low Tunnel Filtered Satisfaction: 17584.000000000706
+Low Tunnel Filtered Maximum Satisfaction: 17584.000000000706
+Low Tunnel Maximum Satisfaction: 17584.000000000706
+High Tunnel Flows Amount: 592
+High Tunnel Flows Priority Sum: 437.9
+High Tunnel Crossing Traffic: 47880
+High Tunnel Current Satisfaction: 35331.0
+High Tunnel Maximum Satisfaction: 35331.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 4066
+Tunnel Low Attacaks Traffic: 37382
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 1.0
+Filtered Benign Pass Rate: 1.0
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 11151
+Queued Flows Priority Total: 2062.7
+Queued Flows Priority Mean: 0.34
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 6 Traffic: 1063030
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 10179
+Low Tunnel Flows Priority Sum: 2570.7
+Low Tunnel Crossing Traffic: 974231
+Low Tunnel Current Satisfaction: 633.6895457399914
+Low Tunnel Filtered Satisfaction: 3363.645381398594
+Low Tunnel Filtered Maximum Satisfaction: 240580.49999999956
+Low Tunnel Maximum Satisfaction: 240580.49999999956
+High Tunnel Flows Amount: 653
+High Tunnel Flows Priority Sum: 501.8
+High Tunnel Crossing Traffic: 49950
+High Tunnel Current Satisfaction: 38267.0
+High Tunnel Maximum Satisfaction: 38267.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 10000
+Tunnel Low Attacaks Traffic: 963196
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 0.8283404791616192
+Filtered Benign Pass Rate: 0.8571044882853464
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 2996.8
+Queued Flows Priority Mean: 0.34
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 7 Traffic: 71010
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 5074
+Low Tunnel Flows Priority Sum: 1782.3
+Low Tunnel Crossing Traffic: 45516
+Low Tunnel Current Satisfaction: 18707.4999999989
+Low Tunnel Filtered Satisfaction: 18707.4999999989
+Low Tunnel Filtered Maximum Satisfaction: 18707.4999999989
+Low Tunnel Maximum Satisfaction: 18707.4999999989
+High Tunnel Flows Amount: 701
+High Tunnel Flows Priority Sum: 557.1
+High Tunnel Crossing Traffic: 49630
+High Tunnel Current Satisfaction: 39484.0
+High Tunnel Maximum Satisfaction: 39484.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 4590
+Tunnel Low Attacaks Traffic: 22916
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 1.0
+Filtered Benign Pass Rate: 1.0
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 25864
+Queued Flows Priority Total: 2996.8
+Queued Flows Priority Mean: 0.34
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 8 Traffic: 1077060
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 10410
+Low Tunnel Flows Priority Sum: 2691.0
+Low Tunnel Crossing Traffic: 1002954
+Low Tunnel Current Satisfaction: 630.7318822004406
+Low Tunnel Filtered Satisfaction: 3343.532291210493
+Low Tunnel Filtered Maximum Satisfaction: 253785.50000000157
+Low Tunnel Maximum Satisfaction: 253785.50000000157
+High Tunnel Flows Amount: 745
+High Tunnel Flows Priority Sum: 606.5
+High Tunnel Crossing Traffic: 49970
+High Tunnel Current Satisfaction: 40623.0
+High Tunnel Maximum Satisfaction: 40623.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 10000
+Tunnel Low Attacaks Traffic: 978383
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 0.686802317545979
+Filtered Benign Pass Rate: 0.7459273289839323
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 3730.1
+Queued Flows Priority Mean: 0.34
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 9 Traffic: 83010
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 5435
+Low Tunnel Flows Priority Sum: 1971.9
+Low Tunnel Crossing Traffic: 46315
+Low Tunnel Current Satisfaction: 21524.199999998786
+Low Tunnel Filtered Satisfaction: 21524.199999998786
+Low Tunnel Filtered Maximum Satisfaction: 21524.199999998786
+Low Tunnel Maximum Satisfaction: 21524.199999998786
+High Tunnel Flows Amount: 789
+High Tunnel Flows Priority Sum: 659.2
+High Tunnel Crossing Traffic: 49860
+High Tunnel Current Satisfaction: 41592.0
+High Tunnel Maximum Satisfaction: 41592.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 4623
+Tunnel Low Attacaks Traffic: 12100
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 1.0
+Filtered Benign Pass Rate: 1.0
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 36835
+Queued Flows Priority Total: 3730.1
+Queued Flows Priority Mean: 0.34
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 10 Traffic: 1088010
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 10656
+Low Tunnel Flows Priority Sum: 2824.7
+Low Tunnel Crossing Traffic: 1025035
+Low Tunnel Current Satisfaction: 629.024263403752
+Low Tunnel Filtered Satisfaction: 3375.896345023232
+Low Tunnel Filtered Maximum Satisfaction: 264365.4999999999
+Low Tunnel Maximum Satisfaction: 264365.4999999999
+High Tunnel Flows Amount: 857
+High Tunnel Flows Priority Sum: 723.7
+High Tunnel Crossing Traffic: 49810
+High Tunnel Current Satisfaction: 42074.0
+High Tunnel Maximum Satisfaction: 42074.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 10000
+Tunnel Low Attacaks Traffic: 989652
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 0.6049316383438432
+Filtered Benign Pass Rate: 0.681018840719691
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 4301.7
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 11 Traffic: 92080
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 3543
+Low Tunnel Flows Priority Sum: 1394.3
+Low Tunnel Crossing Traffic: 46213
+Low Tunnel Current Satisfaction: 23516.300000000414
+Low Tunnel Filtered Satisfaction: 23516.300000000414
+Low Tunnel Filtered Maximum Satisfaction: 23516.300000000414
+Low Tunnel Maximum Satisfaction: 23516.300000000414
+High Tunnel Flows Amount: 841
+High Tunnel Flows Priority Sum: 721.3
+High Tunnel Crossing Traffic: 49380
+High Tunnel Current Satisfaction: 42351.0
+High Tunnel Maximum Satisfaction: 42351.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 2489
+Tunnel Low Attacaks Traffic: 2981
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 1.0
+Filtered Benign Pass Rate: 1.0
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 46487
+Queued Flows Priority Total: 4301.7
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 12 Traffic: 1095030
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 10773
+Low Tunnel Flows Priority Sum: 2893.1
+Low Tunnel Crossing Traffic: 1042467
+Low Tunnel Current Satisfaction: 626.1404283516401
+Low Tunnel Filtered Satisfaction: 3441.2497264746726
+Low Tunnel Filtered Maximum Satisfaction: 272180.0999999992
+Low Tunnel Maximum Satisfaction: 272180.0999999992
+High Tunnel Flows Amount: 856
+High Tunnel Flows Priority Sum: 738.3
+High Tunnel Crossing Traffic: 49050
+High Tunnel Current Satisfaction: 42530.0
+High Tunnel Maximum Satisfaction: 42530.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 10000
+Tunnel Low Attacaks Traffic: 996487
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 0.5393596294736099
+Filtered Benign Pass Rate: 0.6207382254542411
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 4579.8
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 13 Traffic: 97040
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 795
+Low Tunnel Flows Priority Sum: 414.6
+Low Tunnel Crossing Traffic: 48150
+Low Tunnel Current Satisfaction: 25477.0
+Low Tunnel Filtered Satisfaction: 25477.0
+Low Tunnel Filtered Maximum Satisfaction: 25477.0
+Low Tunnel Maximum Satisfaction: 25477.0
+High Tunnel Flows Amount: 880
+High Tunnel Flows Priority Sum: 758.6
+High Tunnel Crossing Traffic: 48890
+High Tunnel Current Satisfaction: 42547.0
+High Tunnel Maximum Satisfaction: 42547.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 0
+Tunnel Low Attacaks Traffic: 0
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 1.0
+Filtered Benign Pass Rate: 1.0
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 4579.8
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 14 Traffic: 1099090
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 10832
+Low Tunnel Flows Priority Sum: 2928.4
+Low Tunnel Crossing Traffic: 1050100
+Low Tunnel Current Satisfaction: 625.529371951591
+Low Tunnel Filtered Satisfaction: 3542.644759920297
+Low Tunnel Filtered Maximum Satisfaction: 275911.0
+Low Tunnel Maximum Satisfaction: 275911.0
+High Tunnel Flows Amount: 891
+High Tunnel Flows Priority Sum: 770.4
+High Tunnel Crossing Traffic: 48990
+High Tunnel Current Satisfaction: 42761.0
+High Tunnel Maximum Satisfaction: 42761.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 10000
+Tunnel Low Attacaks Traffic: 1000000
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 0.5184729750375113
+Filtered Benign Pass Rate: 0.6046698460103201
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 4579.8
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 15 Traffic: 99060
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 855
+Low Tunnel Flows Priority Sum: 447.4
+Low Tunnel Crossing Traffic: 50270
+Low Tunnel Current Satisfaction: 26338.773210697687
+Low Tunnel Filtered Satisfaction: 26495.42
+Low Tunnel Filtered Maximum Satisfaction: 26624.0
+Low Tunnel Maximum Satisfaction: 26624.0
+High Tunnel Flows Amount: 896
+High Tunnel Flows Priority Sum: 775.8
+High Tunnel Crossing Traffic: 48790
+High Tunnel Current Satisfaction: 42514.0
+High Tunnel Maximum Satisfaction: 42514.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 0
+Tunnel Low Attacaks Traffic: 0
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 0.9972743791641432
+Filtered Benign Pass Rate: 0.9971835251362811
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 4579.8
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 16 Traffic: 1099050
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 10876
+Low Tunnel Flows Priority Sum: 2952.7
+Low Tunnel Crossing Traffic: 1050430
+Low Tunnel Current Satisfaction: 625.3312564640904
+Low Tunnel Filtered Satisfaction: 3536.037120280547
+Low Tunnel Filtered Maximum Satisfaction: 275997.0
+Low Tunnel Maximum Satisfaction: 275997.0
+High Tunnel Flows Amount: 902
+High Tunnel Flows Priority Sum: 781.2
+High Tunnel Crossing Traffic: 48620
+High Tunnel Current Satisfaction: 42299.0
+High Tunnel Maximum Satisfaction: 42299.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 10000
+Tunnel Low Attacaks Traffic: 1000000
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 0.5150978852279638
+Filtered Benign Pass Rate: 0.6012225169481116
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 4579.8
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 17 Traffic: 97070
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 866
+Low Tunnel Flows Priority Sum: 455.4
+Low Tunnel Crossing Traffic: 48460
+Low Tunnel Current Satisfaction: 25507.0
+Low Tunnel Filtered Satisfaction: 25507.0
+Low Tunnel Filtered Maximum Satisfaction: 25507.0
+Low Tunnel Maximum Satisfaction: 25507.0
+High Tunnel Flows Amount: 907
+High Tunnel Flows Priority Sum: 784.1
+High Tunnel Crossing Traffic: 48610
+High Tunnel Current Satisfaction: 41984.0
+High Tunnel Maximum Satisfaction: 41984.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 0
+Tunnel Low Attacaks Traffic: 0
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 1.0
+Filtered Benign Pass Rate: 1.0
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 4579.8
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 18 Traffic: 1095040
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 10867
+Low Tunnel Flows Priority Sum: 2947.1
+Low Tunnel Crossing Traffic: 1046340
+Low Tunnel Current Satisfaction: 624.3472740516817
+Low Tunnel Filtered Satisfaction: 3461.338983770408
+Low Tunnel Filtered Maximum Satisfaction: 273421.0
+Low Tunnel Maximum Satisfaction: 273421.0
+High Tunnel Flows Amount: 903
+High Tunnel Flows Priority Sum: 780.4
+High Tunnel Crossing Traffic: 48700
+High Tunnel Current Satisfaction: 41925.0
+High Tunnel Maximum Satisfaction: 41925.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 10000
+Tunnel Low Attacaks Traffic: 1000000
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 0.5357153344005133
+Filtered Benign Pass Rate: 0.6175511886980334
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 4579.8
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 19 Traffic: 92040
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 2223
+Low Tunnel Flows Priority Sum: 949.1
+Low Tunnel Crossing Traffic: 45246
+Low Tunnel Current Satisfaction: 23028.300000000265
+Low Tunnel Filtered Satisfaction: 23028.300000000265
+Low Tunnel Filtered Maximum Satisfaction: 23028.300000000265
+Low Tunnel Maximum Satisfaction: 23028.300000000265
+High Tunnel Flows Amount: 886
+High Tunnel Flows Priority Sum: 766.0
+High Tunnel Crossing Traffic: 48510
+High Tunnel Current Satisfaction: 41659.0
+High Tunnel Maximum Satisfaction: 41659.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 1123
+Tunnel Low Attacaks Traffic: 1405
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 1.0
+Filtered Benign Pass Rate: 1.0
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 48284
+Queued Flows Priority Total: 4579.8
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 20 Traffic: 1088020
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 10794
+Low Tunnel Flows Priority Sum: 2901.3
+Low Tunnel Crossing Traffic: 1037754
+Low Tunnel Current Satisfaction: 623.732184490327
+Low Tunnel Filtered Satisfaction: 3321.6848757528064
+Low Tunnel Filtered Maximum Satisfaction: 268687.2
+Low Tunnel Maximum Satisfaction: 268687.2
+High Tunnel Flows Amount: 899
+High Tunnel Flows Priority Sum: 773.4
+High Tunnel Crossing Traffic: 48550
+High Tunnel Current Satisfaction: 41479.0
+High Tunnel Maximum Satisfaction: 41479.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 10000
+Tunnel Low Attacaks Traffic: 998284
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 0.5731845387539232
+Filtered Benign Pass Rate: 0.6468918332719875
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 4766.7
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 21 Traffic: 83090
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 6007
+Low Tunnel Flows Priority Sum: 2130.7
+Low Tunnel Crossing Traffic: 43162
+Low Tunnel Current Satisfaction: 20369.49999999926
+Low Tunnel Filtered Satisfaction: 20369.49999999926
+Low Tunnel Filtered Maximum Satisfaction: 20369.49999999926
+Low Tunnel Maximum Satisfaction: 20369.49999999926
+High Tunnel Flows Amount: 903
+High Tunnel Flows Priority Sum: 766.5
+High Tunnel Crossing Traffic: 47000
+High Tunnel Current Satisfaction: 39783.0
+High Tunnel Maximum Satisfaction: 39783.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 4833
+Tunnel Low Attacaks Traffic: 6108
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 1.0
+Filtered Benign Pass Rate: 1.0
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 42928
+Queued Flows Priority Total: 4766.7
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.05
+==========================================================
+
+Second: 22 Traffic: 1077080
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 10608
+Low Tunnel Flows Priority Sum: 2790.2
+Low Tunnel Crossing Traffic: 1021428
+Low Tunnel Current Satisfaction: 624.9942735520326
+Low Tunnel Filtered Satisfaction: 3169.730512272399
+Low Tunnel Filtered Maximum Satisfaction: 260826.39999999784
+Low Tunnel Maximum Satisfaction: 260826.39999999784
+High Tunnel Flows Amount: 928
+High Tunnel Flows Priority Sum: 773.5
+High Tunnel Crossing Traffic: 48580
+High Tunnel Current Satisfaction: 40152.0
+High Tunnel Maximum Satisfaction: 40152.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 10000
+Tunnel Low Attacaks Traffic: 992928
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 0.648353732168962
+Filtered Benign Pass Rate: 0.7062301259117781
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 5168.7
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.04
+==========================================================
+
+Second: 23 Traffic: 71020
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 10434
+Low Tunnel Flows Priority Sum: 3526.3
+Low Tunnel Crossing Traffic: 43134
+Low Tunnel Current Satisfaction: 17771.699999997363
+Low Tunnel Filtered Satisfaction: 17771.699999997363
+Low Tunnel Filtered Maximum Satisfaction: 17771.699999997363
+Low Tunnel Maximum Satisfaction: 17771.699999997363
+High Tunnel Flows Amount: 910
+High Tunnel Flows Priority Sum: 749.3
+High Tunnel Crossing Traffic: 47750
+High Tunnel Current Satisfaction: 38727.0
+High Tunnel Maximum Satisfaction: 38727.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 9342
+Tunnel Low Attacaks Traffic: 18205
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 1.0
+Filtered Benign Pass Rate: 1.0
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 30136
+Queued Flows Priority Total: 5168.7
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.04
+==========================================================
+
+Second: 24 Traffic: 1063060
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 10346
+Low Tunnel Flows Priority Sum: 2646.0
+Low Tunnel Crossing Traffic: 994636
+Low Tunnel Current Satisfaction: 628.7693462834357
+Low Tunnel Filtered Satisfaction: 3129.173018185306
+Low Tunnel Filtered Maximum Satisfaction: 248816.80000000098
+Low Tunnel Maximum Satisfaction: 248816.80000000098
+High Tunnel Flows Amount: 977
+High Tunnel Flows Priority Sum: 769.1
+High Tunnel Crossing Traffic: 48560
+High Tunnel Current Satisfaction: 37866.0
+High Tunnel Maximum Satisfaction: 37866.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 10000
+Tunnel Low Attacaks Traffic: 982294
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 0.8075338736931702
+Filtered Benign Pass Rate: 0.8407091518183359
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 5861.6
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.04
+==========================================================
+
+Second: 25 Traffic: 55030
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 9536
+Low Tunnel Flows Priority Sum: 3130.8
+Low Tunnel Crossing Traffic: 38943
+Low Tunnel Current Satisfaction: 14381.000000000227
+Low Tunnel Filtered Satisfaction: 14381.000000000227
+Low Tunnel Filtered Maximum Satisfaction: 14381.000000000227
+Low Tunnel Maximum Satisfaction: 14381.000000000227
+High Tunnel Flows Amount: 910
+High Tunnel Flows Priority Sum: 710.2
+High Tunnel Crossing Traffic: 43890
+High Tunnel Current Satisfaction: 33675.0
+High Tunnel Maximum Satisfaction: 33675.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 8593
+Tunnel Low Attacaks Traffic: 25025
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 1.0
+Filtered Benign Pass Rate: 1.0
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 22197
+Queued Flows Priority Total: 5861.6
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.04
+==========================================================
+
+Second: 26 Traffic: 1046000
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 10062
+Low Tunnel Flows Priority Sum: 2517.2
+Low Tunnel Crossing Traffic: 969617
+Low Tunnel Current Satisfaction: 633.9270139864702
+Low Tunnel Filtered Satisfaction: 3245.1545660713277
+Low Tunnel Filtered Maximum Satisfaction: 238396.4000000034
+Low Tunnel Maximum Satisfaction: 238396.4000000034
+High Tunnel Flows Amount: 996
+High Tunnel Flows Priority Sum: 715.3
+High Tunnel Crossing Traffic: 48580
+High Tunnel Current Satisfaction: 33288.0
+High Tunnel Maximum Satisfaction: 33288.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 9909
+Tunnel Low Attacaks Traffic: 964729
+Tunnel High Attacks: 91
+Tunnel High Attacks Traffic: 9100
+Benign Pass Rate: 0.8955115913931629
+Filtered Benign Pass Rate: 0.9114124167655078
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 6667.0
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.04
+==========================================================
+
+Second: 27 Traffic: 36020
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 4863
+Low Tunnel Flows Priority Sum: 1636.3
+Low Tunnel Crossing Traffic: 33020
+Low Tunnel Current Satisfaction: 11926.200000000215
+Low Tunnel Filtered Satisfaction: 11926.200000000215
+Low Tunnel Filtered Maximum Satisfaction: 11926.200000000215
+Low Tunnel Maximum Satisfaction: 11926.200000000215
+High Tunnel Flows Amount: 776
+High Tunnel Flows Priority Sum: 583.8
+High Tunnel Crossing Traffic: 31030
+High Tunnel Current Satisfaction: 23279.0
+High Tunnel Maximum Satisfaction: 23279.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 4276
+Tunnel Low Attacaks Traffic: 26096
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 1.0
+Filtered Benign Pass Rate: 1.0
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 21970
+Queued Flows Priority Total: 6667.0
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.04
+==========================================================
+
+Second: 28 Traffic: 1026960
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 9826
+Low Tunnel Flows Priority Sum: 2422.8
+Low Tunnel Crossing Traffic: 950340
+Low Tunnel Current Satisfaction: 639.0757154689064
+Low Tunnel Filtered Satisfaction: 3330.9007062577716
+Low Tunnel Filtered Maximum Satisfaction: 230871.50000000006
+Low Tunnel Maximum Satisfaction: 230871.50000000006
+High Tunnel Flows Amount: 923
+High Tunnel Flows Priority Sum: 595.3
+High Tunnel Crossing Traffic: 48590
+High Tunnel Current Satisfaction: 27569.0
+High Tunnel Maximum Satisfaction: 27569.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 9775
+Tunnel Low Attacaks Traffic: 949680
+Tunnel High Attacks: 225
+Tunnel High Attacks Traffic: 22500
+Benign Pass Rate: 0.9766252117540225
+Filtered Benign Pass Rate: 0.9807375040202287
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 7458.9
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.04
+==========================================================
+
+Second: 29 Traffic: 19470
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 3357
+Low Tunnel Flows Priority Sum: 1116.5
+Low Tunnel Crossing Traffic: 27414
+Low Tunnel Current Satisfaction: 9620.59999999984
+Low Tunnel Filtered Satisfaction: 9620.59999999984
+Low Tunnel Filtered Maximum Satisfaction: 9620.59999999984
+Low Tunnel Maximum Satisfaction: 9620.59999999984
+High Tunnel Flows Amount: 575
+High Tunnel Flows Priority Sum: 412.0
+High Tunnel Crossing Traffic: 19110
+High Tunnel Current Satisfaction: 13516.0
+High Tunnel Maximum Satisfaction: 13516.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 3215
+Tunnel Low Attacaks Traffic: 26818
+Tunnel High Attacks: 0
+Tunnel High Attacks Traffic: 0
+Benign Pass Rate: 1.0
+Filtered Benign Pass Rate: 1.0
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 22946
+Queued Flows Priority Total: 7458.9
+Queued Flows Priority Mean: 0.33
+Queued Flows Priority Stdev: 0.04
+==========================================================
+
+Second: 30 Traffic: 1013450
+====================== BASIC REPORT ======================
+Low Tunnel Flows Amount: 9649
+Low Tunnel Flows Priority Sum: 2352.0
+Low Tunnel Crossing Traffic: 937846
+Low Tunnel Current Satisfaction: 642.4168165634554
+Low Tunnel Filtered Satisfaction: 3368.7231669695134
+Low Tunnel Filtered Maximum Satisfaction: 226016.39999999682
+Low Tunnel Maximum Satisfaction: 226016.39999999682
+High Tunnel Flows Amount: 819
+High Tunnel Flows Priority Sum: 468.0
+High Tunnel Crossing Traffic: 48550
+High Tunnel Current Satisfaction: 23472.0
+High Tunnel Maximum Satisfaction: 23472.0
+==========================================================
+======================= DDoS REPORT ======================
+Tunnel Low Attacks: 9649
+Tunnel Low Attacaks Traffic: 937846
+Tunnel High Attacks: 351
+Tunnel High Attacks Traffic: 35100
+Benign Pass Rate: 1.0
+Filtered Benign Pass Rate: 1.0
+==========================================================
+====================== QUEUE REPORT =======================
+Queued Traffic Total: 50000
+Queued Flows Priority Total: 8221.1
+Queued Flows Priority Mean: 0.32
+Queued Flows Priority Stdev: 0.04
+==========================================================
+============================= DEMONS TEST END ===========================
+
