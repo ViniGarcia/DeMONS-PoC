@@ -75,11 +75,11 @@ Carlos Raniery Paula dos Santos (csantos@inf.ufsm.br) - UFSM, Brazil <br/>
 
 ### References
 
--> VGuard <-<br/>
+-> VGuard <-
 <p align="justify">[1] C. J. Fung and B. McCormick, "VGuard: A distributed denial of service attack mitigation method using network function virtualization," 2015 11th International Conference on Network and Service Management (CNSM), Barcelona, Spain, 2015, pp. 64-70. doi:10.1109/CNSM.2015.7367340</p>
 
--> Click-On-OSv <-<br/>
+-> Click-On-OSv <-
 <p align="justify">[2] L. da Cruz Marcuzzo et al., "Click-on-OSv: A platform for running Click-based middleboxes", 2017 IFIP/IEEE Symposium on Integrated Network and Service Management (IM), Lisbon, 2017, pp. 885-886. doi: 10.23919/INM.2017.7987396</p>
 
--> NIEP <-<br/>
+-> NIEP <-
 <p align="justify">[3] T. Tavares, L. Marcuzzo, V. Garcia, G. Venâncio, M. Franco, L. Bondan, F. De Turk, L. Granville, E. Duarte, C. Santos and A. Schaeffer-filho, "NIEP - NFV Infrastructure Emulation Platform", in 32nd IEEE AINA, Cracow, Poland, 2018.</p>
