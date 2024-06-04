@@ -70,16 +70,16 @@ Carlos Raniery Paula dos Santos (csantos@inf.ufsm.br) - UFSM, Brazil <br/>
 ### Publications
 
 <p align="justify">V. F. Garcia et al., "Uma Solução para Mitigação de Ataques DDoS Através de Tecnologia NFV", 2018 1st Workshop de Segurança Cibernética em Dispositivos Conectados (WSCDC SBRC). Campos do Jordão, Brazil, 2018.</p>
-<br/><br/>
+
 <p align="justify">V. Fülber Garcia, G. de Freitas Gaiardo, L. da Cruz Marcuzzo, R. Ceretta Nunes and C. R. Paula dos Santos, "DeMONS: A DDoS Mitigation NFV Solution," 2018 IEEE 32nd International Conference on Advanced Information Networking and Applications (AINA), Krakow, 2018, pp. 769-776. doi: 10.1109/AINA.2018.00115</p>
 
 ### References
 
 -> VGuard <-<br/>
 <p align="justify">[1] C. J. Fung and B. McCormick, "VGuard: A distributed denial of service attack mitigation method using network function virtualization," 2015 11th International Conference on Network and Service Management (CNSM), Barcelona, Spain, 2015, pp. 64-70. doi:10.1109/CNSM.2015.7367340</p>
-<br/>
+
 -> Click-On-OSv <-<br/>
 <p align="justify">[2] L. da Cruz Marcuzzo et al., "Click-on-OSv: A platform for running Click-based middleboxes", 2017 IFIP/IEEE Symposium on Integrated Network and Service Management (IM), Lisbon, 2017, pp. 885-886. doi: 10.23919/INM.2017.7987396</p>
-<br/>
+
 -> NIEP <-<br/>
 <p align="justify">[3] T. Tavares, L. Marcuzzo, V. Garcia, G. Venâncio, M. Franco, L. Bondan, F. De Turk, L. Granville, E. Duarte, C. Santos and A. Schaeffer-filho, "NIEP - NFV Infrastructure Emulation Platform", in 32nd IEEE AINA, Cracow, Poland, 2018.</p>
