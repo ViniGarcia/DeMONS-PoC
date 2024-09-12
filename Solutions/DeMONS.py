@@ -38,9 +38,11 @@ class DeMONS:
     tunnelLowDropRate = None
 
 #schedulerData - queue for traffic shapping (not used for policing)
+#maxIntervalQueue - how many times the same traffic can be enqueued
     schedulerData = None
+    maxIntervalQueue = None
 
-    def __init__(self, lowCapacity, highCapacity, highNormal, schedulerQueue = 0):
+    def __init__(self, lowCapacity, highCapacity, highNormal, schedulerQueue = 0, maxIntervalQueue = 0):
         self.tunnelLowCapacity = lowCapacity
         self.tunnelHighCapacity = highCapacity
         self.tunnelHighNormal = highNormal
@@ -58,7 +60,9 @@ class DeMONS:
         self.tunnelLowDrop = {}
         self.tunnelLowDropRate = 0
 
-        self.schedulerData = [schedulerQueue, 0, []]
+        self.schedulerData = [schedulerQueue, 0, [], 0]
+        self.maxIntervalQueue = maxIntervalQueue
+
 
     def condicionalAllocation(self, flowTriple):
         flowFree = self.tunnelHighCapacity - self.tunnelHighUse
@@ -86,6 +90,7 @@ class DeMONS:
                 self.tunnelLowSum += flowTriple[0]
                 return False
 
+
     def balanceFlows(self):
         tunnelLowFlowsCopy = reversed(copy.copy(self.tunnelLowFlows))
         for flow in tunnelLowFlowsCopy:
@@ -94,42 +99,50 @@ class DeMONS:
                 self.tunnelLowSum -= flow[0]
                 self.condicionalAllocation(self.tunnelLowFlows.pop(self.tunnelLowFlows.index(flow)))
             else:
-                break
+                break    
 
-    def selectiveFlowAllocation(self, flowID, flowPriority, flowIntensity, flowType):
+
+    def selectiveFlowAllocation(self, flowID, flowPriority, flowIntensity, flowType, flowQueue = 0):
+        if flowQueue == 0:
+            flowList = [flowPriority, flowIntensity, flowID, flowType]
+        else:
+            flowList = [flowPriority, flowIntensity, flowID, flowType, flowQueue]
+
+
         if self.tunnelLowUse < self.tunnelHighUse:
-            bisect.insort(self.tunnelLowFlows,[flowPriority, flowIntensity, flowID, flowType])
+            bisect.insort(self.tunnelLowFlows, flowList)
             self.tunnelLowUse += flowIntensity
             self.tunnelLowSum += flowPriority
         else:
             if self.tunnelHighUse/self.tunnelHighCapacity < self.tunnelHighNormal:
                 if self.tunnelHighUse + flowIntensity <= self.tunnelHighCapacity:
-                    bisect.insort(self.tunnelHighFlows,[flowPriority, flowIntensity, flowID, flowType])
+                    bisect.insort(self.tunnelHighFlows, flowList)
                     self.lastTunnelHighUse = self.tunnelHighUse
                     self.tunnelHighUse += flowIntensity
                     self.tunnelHighSum += flowPriority
                 else:
-                    bisect.insort(self.tunnelLowFlows, [flowPriority, flowIntensity, flowID, flowType])
+                    bisect.insort(self.tunnelLowFlows, flowList)
                     self.tunnelLowUse += flowIntensity
                     self.tunnelLowSum += flowPriority
             else:
                 if self.tunnelHighUse >= self.tunnelHighCapacity:
-                    self.condicionalAllocation([flowPriority, flowIntensity, flowID, flowType])
+                    self.condicionalAllocation(flowList)
                 else:
                     if self.lastTunnelHighUse/self.tunnelHighCapacity < self.tunnelHighNormal:
                         self.balanceFlows()
                     if flowPriority > self.tunnelHighFlows[0][0]:
                         if self.tunnelHighUse + flowIntensity <= self.tunnelHighCapacity:
-                            bisect.insort(self.tunnelHighFlows, [flowPriority, flowIntensity, flowID, flowType])
+                            bisect.insort(self.tunnelHighFlows, flowList)
                             self.lastTunnelHighUse = self.tunnelHighUse
                             self.tunnelHighUse += flowIntensity
                             self.tunnelHighSum += flowPriority
                         else:
-                            self.condicionalAllocation([flowPriority, flowIntensity, flowID, flowType])
+                            self.condicionalAllocation(flowList)
                     else:
-                        bisect.insort(self.tunnelLowFlows, [flowPriority, flowIntensity, flowID, flowType])
+                        bisect.insort(self.tunnelLowFlows, flowList)
                         self.tunnelLowUse += flowIntensity
                         self.tunnelLowSum += flowPriority
+
 
     def tunnelLowFilter(self, mechanism, policy = 0):
         if mechanism == 0:

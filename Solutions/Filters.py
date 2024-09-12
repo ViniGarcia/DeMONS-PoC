@@ -92,10 +92,14 @@ def leakyBucketShapper(testMethod, rate):
 
 	queueFree = testMethod.schedulerData[0] - testMethod.schedulerData[1]
 
+	#Se o uso do túnel de baixa prioridade superou o limite suportado com os novos fluxos
 	if testMethod.tunnelLowUse > rate:
+		#Quantidade de tráfego que precisa ser descartado
 		tunnelDropRate = testMethod.tunnelLowUse - rate
+		#Porcentagem de tráfego que precisa ser descartado
 		dropFactor = tunnelDropRate / testMethod.tunnelLowUse
 		
+		#Fator de armazenamento do tráfego na fila baseado no que está liberado
 		queueFactor = queueFree / tunnelDropRate
 		if queueFactor > 1:
 			queueFactor = 1
@@ -105,6 +109,7 @@ def leakyBucketShapper(testMethod, rate):
 
 			flowDrop = math.floor(flow[1] * dropFactor)
 			
+			#Se existe necessidade de enfileiramento (queueFactor > 0), então o fluxo é efileirado segundo o fator necessário
 			if queueFactor > 0:
 				queueData = copy.deepcopy(flow)
 				queueData[1] = math.ceil(flowDrop * queueFactor)
@@ -116,16 +121,20 @@ def leakyBucketShapper(testMethod, rate):
 
 					flow[1] -= queueData[1]
 					testMethod.tunnelLowUse -= queueData[1]
+					#Se todos os pacotes do fluxo foram enfileirados, ele será removido da análise de passagem à posteriori
 					if flow[1] == 0:
 						removeFlows.append(flow)
 
+			#Após o enfileiramento, se ainda restar tráfego que não pode ser tratado, deve ser informado o seu descarte
 			if flowDrop > 0:
 				testMethod.tunnelLowDrop[flow[2]] = flowDrop
 				testMethod.tunnelLowDropRate += flowDrop
 
+		#Para os fluxos completamente enfileirados, remova-os dos candidatos à passarem pelo canal de baixa prioridade
 		for flow in removeFlows:
 			testMethod.tunnelLowFlows.remove(flow)
 			testMethod.tunnelLowSum -= flow[0]
+	#Se o uso do tunel de baixa prioridade não superou o limite suportado com os novos fluxos
 	else:
 		if testMethod.schedulerData[1] != 0:
 			remainingBandwidth = rate - testMethod.tunnelLowUse

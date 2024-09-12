@@ -34,9 +34,11 @@ class VGuard:
     tunnelLowDropRate = None
 
 #schedulerData - queue for traffic shapping (not used for policing)
+#maxIntervalQueue - how many times the same traffic can be enqueued
     schedulerData = None
+    maxIntervalQueue = None
 
-    def __init__(self, lowCapacity, highCapacity, highNormal, schedulerQueue = 0):
+    def __init__(self, lowCapacity, highCapacity, highNormal, schedulerQueue = 0, maxIntervalQueue = 0):
         self.tunnelLowCapacity = lowCapacity
         self.tunnelHighCapacity = highCapacity
         self.tunnelHighNormal = highNormal
@@ -53,30 +55,36 @@ class VGuard:
         self.tunnelLowDrop = {}
         self.tunnelLowDropRate = 0
 
-        self.schedulerData = [schedulerQueue, 0, []]
+        self.schedulerData = [schedulerQueue, 0, [], 0]
+        self.maxIntervalQueue = maxIntervalQueue
 
-    def flowAllocation(self, flowID, flowPriority, flowIntensity, flowType):
+    def flowAllocation(self, flowID, flowPriority, flowIntensity, flowType, flowQueue = 0):
+        if flowQueue == 0:
+            flowList = [flowPriority, flowIntensity, flowID, flowType]
+        else:
+            flowList = [flowPriority, flowIntensity, flowID, flowType, flowQueue]
+        
         if self.tunnelLowUse < self.tunnelHighUse:
-            self.tunnelLowFlows.append([flowPriority, flowIntensity, flowID, flowType])
+            self.tunnelLowFlows.append(flowList)
             self.tunnelLowUse += flowIntensity
             self.tunnelLowSum += flowPriority
         else:
             if self.tunnelHighUse/self.tunnelHighCapacity < self.tunnelHighNormal:
-                self.tunnelHighFlows.append([flowPriority, flowIntensity, flowID, flowType])
+                self.tunnelHighFlows.append(flowList)
                 self.tunnelHighUse += flowIntensity
                 self.tunnelHighSum += flowPriority
             else:
                 if self.tunnelHighUse > self.tunnelHighCapacity:
-                    self.tunnelLowFlows.append([flowPriority, flowIntensity, flowID, flowType])
+                    self.tunnelLowFlows.append(flowList)
                     self.tunnelLowUse += flowIntensity
                     self.tunnelLowSum += flowPriority
                 else:
                     if flowPriority > self.tunnelHighSum/len(self.tunnelHighFlows):
-                        self.tunnelHighFlows.append([flowPriority, flowIntensity, flowID, flowType])
+                        self.tunnelHighFlows.append(flowList)
                         self.tunnelHighUse += flowIntensity
                         self.tunnelHighSum += flowPriority
                     else:
-                        self.tunnelLowFlows.append([flowPriority, flowIntensity, flowID, flowType])
+                        self.tunnelLowFlows.append(flowList)
                         self.tunnelLowUse += flowIntensity
                         self.tunnelLowSum += flowPriority
 

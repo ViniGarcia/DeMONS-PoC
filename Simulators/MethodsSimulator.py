@@ -46,6 +46,41 @@ class MethodsSimulator:
                     testMethod.flowAllocation(flowID, flowPriority, flowIntensity, flowType)
 
 
+    def removeDeadFlows(self, testMethod):
+        for flow in testMethod.tunnelHighFlows:
+            if len(flow) == 5:
+                testMethod.tunnelHighUse -= flow[1]
+                testMethod.tunnelHighSum -= flow[0]
+                testMethod.tunnelHighFlows.remove(flow)
+        for flow in testMethod.tunnelLowFlows:
+            if len(flow) == 5:
+                testMethod.tunnelLowUse -= flow[1]
+                testMethod.tunnelLowSum -= flow[0]
+                testMethod.tunnelLowFlows.remove(flow)
+
+
+    def queueAllocation(self, testMethod): 
+        testMethod.schedulerData[3] = 0
+
+        for flow in testMethod.schedulerData[2]:
+            if len(flow) == 4:
+                flow.append(1)
+            else:
+                if flow[4] < testMethod.maxIntervalQueue:
+                    flow[4] += 1
+                else:
+                    testMethod.schedulerData[3] += flow[1]
+                    continue
+
+            if isinstance(testMethod, DeMONS):
+                testMethod.selectiveFlowAllocation(flow[2], flow[0], flow[1], flow[3], flow[4])
+            elif isinstance(testMethod, VGuard):
+                testMethod.flowAllocation(flow[2], flow[0], flow[1], flow[3], flow[4])
+
+        testMethod.schedulerData[1] = 0
+        testMethod.schedulerData[2] = []  
+
+
     def lowTunnelSatisfaction(self, testMethod):
         if testMethod.tunnelLowUse != 0:
             dropRate = 1 - min(1, testMethod.tunnelLowCapacity/testMethod.tunnelLowUse)
@@ -137,6 +172,7 @@ class MethodsSimulator:
             outputFile.write('High Tunnel Maximum Satisfaction: ' + str(highSatisfaction[1]) + "\n")
             outputFile.write('==========================================================\n')
 
+
     def generateFilterReport(self, testMethod, outputFile = None):
         priorities = [0]*10
         traffic = [0]*10
@@ -162,9 +198,8 @@ class MethodsSimulator:
             outputFile.write('After Filter Tunnel Drop Rate: ' + str((testMethod.tunnelLowUse - testMethod.tunnelLowDropRate)/len(testMethod.tunnelLowFlows)) + "\n")
             outputFile.write('==========================================================\n')
 
+
     def generateQueueReport(self, testMethod, outputFile = None):
-
-
         priorities = []
         traffic = []
         if testMethod.schedulerData[1] <= 0:
@@ -189,6 +224,7 @@ class MethodsSimulator:
             outputFile.write('Queued Flows Priority Mean: ' + str(round(mean(priorities), 2)) + "\n")
             outputFile.write('Queued Flows Priority Stdev: ' + str(round(stdev(priorities), 2)) + "\n")
             outputFile.write('==========================================================\n')
+
 
     def generateDDoSReport(self, testMethod, outputFile = None):
         benignLowPassRate = 0
@@ -262,6 +298,7 @@ class MethodsSimulator:
                 outputFile.write('Filtered Benign Pass Rate: 0\n')
             outputFile.write('==========================================================\n')
 
+
     #METHOD: simulationBySecond
     # The main method to execute the simulations -- creates a schedule for executing the simulator routines.
     # It is relevant to note that this method assumes that the "testMethod" class has standard methods (template).
@@ -270,6 +307,8 @@ class MethodsSimulator:
     # reportInterval: calculate evaluation metrics at X seconds of the simulation (1 -> second by second; 2 -> 2 by 2 seconds; ...)
     # filterMechanism: filter mechanism ID for the low priority tunnel [0: Method Std; 1: Token Bucket Policer; 2: Leaky Bucket Shaper; 3..: Leaky Bucket Shaper + Priority Filter]
     # filterPolicy: filter policy ID (sometimes not required) [0: Restrictive; 1: Medium; 2: Permissive]
+    #TODO: A FILA NÃO ESTÁ SENDO 100% APROVEITADA EM CENÁRIOS DE SOBRECARGA -- VERIFICAR O QUE PODE ESTAR GERANDO ESSE FENOMENO
+    #TODO: OS CANAIS NÃO ESTÃO SENDO 100% APROVEITADOS -- VERIFICAR O QUE PODE ESTAR CAUSANDO ESSE FENOMENO
     def simulationBySecond(self, trafficFilePath, testMethod, reportInterval = 1, filterMechanism = 0, filterPolicy = 0, outputFile = None):
         seconds = 1
         inputData = open(trafficFilePath, 'r')
@@ -279,14 +318,23 @@ class MethodsSimulator:
         for data in trafficFile:
             if data.startswith('['):
                 parsedData = (data[1:len(data) - 2]).replace(' ', '').split(',')
+                #parsedData -> [0](ID), [2](reputation), [1](traffic), [3](class)
                 self.trafficHistoryInsert(int(parsedData[0]), float(parsedData[2]), int(parsedData[1]), parsedData[3], testMethod)
             else:
                 if data != '\r\n' and data != '\n':
-                    print('Second: ' + str(seconds) + ' Traffic: ' + str(data.replace('\n', '')))
+                    
+                    #Removing residual flows regarding transmissions from queues (if no queue is used, the function does not execute any operation)
+                    self.removeDeadFlows(testMethod)
+                    
+                    print('Second: ' + str(seconds) + ' Traffic: ' + str(data.replace('\n', '') + ' Queued: ' + str(testMethod.schedulerData[1])))
                     if outputFile != None:
                         outputFile.write('\nSecond: ' + str(seconds) + ' Traffic: ' + str(data.replace('\n', '')) + "\n")
                     seconds += 1
                 else:
+
+                    #Inserting flows from the queue into the low-priority tunnel to compete for resources
+                    self.queueAllocation(testMethod)
+
                     nonQueuedData = len(testMethod.tunnelLowFlows)
                     testMethod.tunnelLowFilter(filterMechanism, filterPolicy)
                     

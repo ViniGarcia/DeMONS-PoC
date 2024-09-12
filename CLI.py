@@ -33,28 +33,32 @@ class SimulationCLI(Cmd):
 		print ('-- ddos_start_moment: integer')
 		print ('')
 		print ('vguard -> execute a VGuard solution simulation')
-		print ('- arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode [scheduler_queue_size]')
+		print ('- arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode [scheduler_queue_size queue_max_interval]')
 		print ('-- flow_file: string')
 		print ('-- tunnel_low_cap: integer')
 		print ('-- tunnel_high_cap: integer')
 		print ('-- selective_mode: float (>= 0 and <= 1)')
-		print ('-- scheduler_queue_size: integer, optional argument')
+		print ('-- scheduler_queue_size: integer (>= 0), optional argument')
+		print ('-- queue_max_interval: integer (>= 1), optional argument')
 		print ('')
 		print ('demons -> execute a DeMONS solution simulation')
-		print ('- arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode [scheduler_queue_size]')
+		print ('- arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode [scheduler_queue_size queue_max_interval]')
 		print ('-- flow_file: string')
 		print ('-- tunnel_low_cap: integer')
 		print ('-- tunnel_high_cap: integer')
 		print ('-- selective_mode: float (>= 0 and <= 1)')
-		print ('-- scheduler_queue_size: integer, optional argument')
+		print ('-- scheduler_queue_size: integer (>= 0), optional argument')
+		print ('-- queue_max_interval: integer (>= 1)')
 		print ('')
 		print ('full -> execute both VGuad and DeMONS simulations')
-		print ('- arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode')
+		print ('- arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode [scheduler_queue_size queue_max_interval]')
 		print ('-- flow_file: string')
 		print ('-- tunnel_low_cap: integer')
 		print ('-- tunnel_high_cap: integer')
 		print ('-- selective_mode: float (>= 0 and <= 1)')
 		print ('-- scheduler_queue_size: integer, optional argument')
+		print ('-- scheduler_queue_size: integer (>= 0), optional argument')
+		print ('-- queue_max_interval: integer (>= 1), optional argument')
 		print ('')
 		print ('reporting -> define how many seconds passes (in the simulation) to create a report')
 		print ('- arguments: seconds')
@@ -146,23 +150,32 @@ class SimulationCLI(Cmd):
 				print('INVALID FILE!!')
 				return
 
-			if len(arguments) == 5:
+			if len(arguments) >=  5:
 				if int(arguments[4]) < 0:
 					print('INVALID SCHEDULER QUEUE CAPACITY!!')
 					return
 				queue = int(arguments[4])
-			elif len(arguments) > 5:
-				print('UNRECOGNIZED ARGUMENTS!!')
-				return
+				
+				if len(arguments) == 6:
+					if int(arguments[5]) < 1:
+						print('INVALID MAX DATA QUEUE INTERVAL!!')
+						return
+					interval = int(arguments[5])
+				elif len(arguments) > 6:
+					print('UNRECOGNIZED ARGUMENTS!!')
+					return
+				else:
+					interval = 1
 			else:
 				queue = 0
+				interval = 0
  			
 			self.output = open("[F" + str(self.mechanism) + "-P" + str(self.policy) + "]-" + "VGuard-" + arguments[0] + "-" + arguments[1] + "-" + arguments[2] + "-" + arguments[3] + "-" + str(queue) + ".txt", "w+")
 			
 			if self.output != None:
 				self.output.write('=========================== VGUARD TEST START ==========================\n\n')
 			print('=========================== VGUARD TEST START ==========================\n')
-			self.methods.simulationBySecond(arguments[0], VGuard(int(arguments[1]), int(arguments[2]), float(arguments[3]), queue), self.report, self.mechanism, self.policy, self.output)
+			self.methods.simulationBySecond(arguments[0], VGuard(int(arguments[1]), int(arguments[2]), float(arguments[3]), queue, interval), self.report, self.mechanism, self.policy, self.output)
 			print('============================ VGUARD TEST END ===========================\n')
 			if self.output != None:
 				self.output.write('============================ VGUARD TEST END ===========================\n\n')
@@ -197,16 +210,25 @@ class SimulationCLI(Cmd):
 				print('INVALID FILE!!')
 				return
 
-			if len(arguments) == 5:
+			if len(arguments) >= 5:
 				if int(arguments[4]) < 0:
 					print('INVALID SCHEDULER QUEUE CAPACITY!!')
 					return
 				queue = int(arguments[4])
-			elif len(arguments) > 5:
-				print('UNRECOGNIZED ARGUMENTS!!')
-				return
+
+				if len(arguments) == 6:
+					if int(arguments[5]) < 1:
+						print('INVALID MAX DATA QUEUE INTERVAL!!')
+						return
+					interval = int(arguments[5])
+				elif len(arguments) > 6:
+					print('UNRECOGNIZED ARGUMENTS!!')
+					return
+				else:
+					interval = 1
 			else:
 				queue = 0
+				interval = 0
 
 			self.output = open("[F" + str(self.mechanism) + "-P" + str(self.policy) + "]-" + "DeMONS-" + arguments[0] + "-" + arguments[1] + "-" + arguments[2] + "-" + arguments[3] + "-" + str(queue) + ".txt", "w+")
 			
@@ -214,7 +236,7 @@ class SimulationCLI(Cmd):
 				self.output.write('============================ DEMONS TEST START ==========================\n\n')
 			
 			print('============================ DEMONS TEST START ==========================\n')
-			self.methods.simulationBySecond(arguments[0], DeMONS(int(arguments[1]), int(arguments[2]), float(arguments[3]), queue), self.report, self.mechanism, self.policy, self.output)
+			self.methods.simulationBySecond(arguments[0], DeMONS(int(arguments[1]), int(arguments[2]), float(arguments[3]), queue, interval), self.report, self.mechanism, self.policy, self.output)
 			print('============================= DEMONS TEST END ===========================\n')
 			if self.output != None:
 				self.output.write('============================= DEMONS TEST END ===========================\n\n')
