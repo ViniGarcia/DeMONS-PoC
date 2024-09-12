@@ -23,7 +23,7 @@ arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode<br/>
 -- tunnel_high_cap: integer (capacity of high priority tunnel in Kbps)<br/>
 -- selective_mode: float (>= 0 and <= 1) (selective mode entrance parameter)<br/>
 -- scheduler_queue_size: integer (>= 0), optional argument (queue size of scheduling mechanisms)<br/>
-
+-- queue_max_interval: integer (>= 1), optional argument (how many time intervals a specific portion of enqueued network traffic remains in the queue)<br/>
 <br/>
 demons -> execute a DeMONS solution simulation<br/>
 arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode<br/>
@@ -32,6 +32,7 @@ arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode<br/>
 -- tunnel_high_cap: integer (capacity of high priority tunnel in Kbps)<br/>
 -- selective_mode: float (>= 0 and <= 1) (selective mode entrance parameter)<br/>
 -- scheduler_queue_size: integer (>= 0), optional argument (queue size of scheduling mechanisms)<br/>
+-- queue_max_interval: integer (>= 1), optional argument (how many time intervals a specific portion of enqueued network traffic remains in the queue)<br/>
 <br/>
 full -> execute both VGuad and DeMONS simulations<br/>
 arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode<br/>
@@ -40,7 +41,7 @@ arguments: flow_file tunnel_low_cap tunnel_high_cap selective_mode<br/>
 -- tunnel_high_cap: integer (capacity of high priority tunnel in Kbps)<br/>
 -- selective_mode: float (>= 0 and <= 1) (selective mode entrance parameter)<br/>
 -- scheduler_queue_size: integer (>= 0), optional argument (queue size of scheduling mechanisms)<br/>
--- 
+-- queue_max_interval: integer (>= 1), optional argument (how many time intervals a specific portion of enqueued network traffic remains in the queue)<br/>
 <br/>
 reporting -> define how many seconds passes (in the simulation) to create a report<br/>
 arguments: seconds<br/>
