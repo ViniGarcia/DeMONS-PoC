@@ -62,6 +62,8 @@ class MethodsSimulator:
     def queueAllocation(self, testMethod): 
         testMethod.schedulerData[3] = 0
 
+        sum_teste = 0
+
         for flow in testMethod.schedulerData[2]:
             if len(flow) == 4:
                 flow.append(1)
@@ -72,6 +74,10 @@ class MethodsSimulator:
                     testMethod.schedulerData[3] += flow[1]
                     continue
 
+            sum_teste += flow[1]
+
+            print(flow[4])
+
             if isinstance(testMethod, DeMONS):
                 testMethod.selectiveFlowAllocation(flow[2], flow[0], flow[1], flow[3], flow[4])
             elif isinstance(testMethod, VGuard):
@@ -79,6 +85,7 @@ class MethodsSimulator:
 
         testMethod.schedulerData[1] = 0
         testMethod.schedulerData[2] = []  
+        print("---> ", sum_teste)
 
 
     def lowTunnelSatisfaction(self, testMethod):
@@ -308,7 +315,6 @@ class MethodsSimulator:
     # filterMechanism: filter mechanism ID for the low priority tunnel [0: Method Std; 1: Token Bucket Policer; 2: Leaky Bucket Shaper; 3..: Leaky Bucket Shaper + Priority Filter]
     # filterPolicy: filter policy ID (sometimes not required) [0: Restrictive; 1: Medium; 2: Permissive]
     #TODO: A FILA NÃO ESTÁ SENDO 100% APROVEITADA EM CENÁRIOS DE SOBRECARGA -- VERIFICAR O QUE PODE ESTAR GERANDO ESSE FENOMENO
-    #TODO: OS CANAIS NÃO ESTÃO SENDO 100% APROVEITADOS -- VERIFICAR O QUE PODE ESTAR CAUSANDO ESSE FENOMENO
     def simulationBySecond(self, trafficFilePath, testMethod, reportInterval = 1, filterMechanism = 0, filterPolicy = 0, outputFile = None):
         seconds = 1
         inputData = open(trafficFilePath, 'r')
@@ -332,8 +338,18 @@ class MethodsSimulator:
                     seconds += 1
                 else:
 
+                    print(testMethod.tunnelLowUse)
+                    print(testMethod.tunnelHighUse, "\n--")
+
                     #Inserting flows from the queue into the low-priority tunnel to compete for resources
                     self.queueAllocation(testMethod)
+
+                    if seconds == 4:
+                        self.removeDeadFlows(testMethod)
+
+                        print(testMethod.tunnelLowUse)
+                        print(testMethod.tunnelHighUse, "\n")
+                        exit()
 
                     nonQueuedData = len(testMethod.tunnelLowFlows)
                     testMethod.tunnelLowFilter(filterMechanism, filterPolicy)
