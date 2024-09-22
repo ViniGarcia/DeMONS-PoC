@@ -47,17 +47,23 @@ class MethodsSimulator:
 
 
     def removeDeadFlows(self, testMethod):
+        oldFlows = []
         for flow in testMethod.tunnelHighFlows:
             if len(flow) == 5:
                 testMethod.tunnelHighUse -= flow[1]
                 testMethod.tunnelHighSum -= flow[0]
-                testMethod.tunnelHighFlows.remove(flow)
+                oldFlows.append(flow)
+        for flow in oldFlows:
+            testMethod.tunnelHighFlows.remove(flow)
+        
+        oldFlows = []
         for flow in testMethod.tunnelLowFlows:
             if len(flow) == 5:
                 testMethod.tunnelLowUse -= flow[1]
                 testMethod.tunnelLowSum -= flow[0]
-                testMethod.tunnelLowFlows.remove(flow)
-
+                oldFlows.append(flow)
+        for flow in oldFlows:
+            testMethod.tunnelLowFlows.remove(flow)
 
     def queueAllocation(self, testMethod): 
         testMethod.schedulerData[3] = 0
@@ -78,8 +84,7 @@ class MethodsSimulator:
                 testMethod.flowAllocation(flow[2], flow[0], flow[1], flow[3], flow[4])
 
         testMethod.schedulerData[1] = 0
-        testMethod.schedulerData[2] = []  
-
+        testMethod.schedulerData[2] = []
 
     def lowTunnelSatisfaction(self, testMethod):
         if testMethod.tunnelLowUse != 0:
@@ -308,7 +313,6 @@ class MethodsSimulator:
     # filterMechanism: filter mechanism ID for the low priority tunnel [0: Method Std; 1: Token Bucket Policer; 2: Leaky Bucket Shaper; 3..: Leaky Bucket Shaper + Priority Filter]
     # filterPolicy: filter policy ID (sometimes not required) [0: Restrictive; 1: Medium; 2: Permissive]
     #TODO: A FILA NÃO ESTÁ SENDO 100% APROVEITADA EM CENÁRIOS DE SOBRECARGA -- VERIFICAR O QUE PODE ESTAR GERANDO ESSE FENOMENO
-    #TODO: OS CANAIS NÃO ESTÃO SENDO 100% APROVEITADOS -- VERIFICAR O QUE PODE ESTAR CAUSANDO ESSE FENOMENO
     def simulationBySecond(self, trafficFilePath, testMethod, reportInterval = 1, filterMechanism = 0, filterPolicy = 0, outputFile = None):
         seconds = 1
         inputData = open(trafficFilePath, 'r')
@@ -331,7 +335,7 @@ class MethodsSimulator:
                         outputFile.write('\nSecond: ' + str(seconds) + ' Traffic: ' + str(data.replace('\n', '')) + "\n")
                     seconds += 1
                 else:
-
+                    
                     #Inserting flows from the queue into the low-priority tunnel to compete for resources
                     self.queueAllocation(testMethod)
 

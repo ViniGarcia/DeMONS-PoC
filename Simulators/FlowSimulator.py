@@ -176,8 +176,6 @@ class FlowSimulator:
         if len(peakTraffic) > len(traffic):
             return False
 
-        print(peakTraffic)
-
         flowResult = [0, 0, []]
         for i in range(0, len(traffic)):
             flowResult = self.__setNormalFlows(flowResult[0], flowResult[2], traffic[i])

@@ -189,6 +189,7 @@ def leakyBucketPriorityShapper(testMethod, rate, policy):
 				dropFactor = 1-flow[0]
 			if dropFactor > 1:
 				dropFactor = 1
+
 			queueFactor = (1 - dropFactor)
 			flowDrop = math.floor(flow[1] * dropFactor)
 
