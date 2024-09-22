@@ -47,22 +47,26 @@ class MethodsSimulator:
 
 
     def removeDeadFlows(self, testMethod):
+        oldFlows = []
         for flow in testMethod.tunnelHighFlows:
             if len(flow) == 5:
                 testMethod.tunnelHighUse -= flow[1]
                 testMethod.tunnelHighSum -= flow[0]
-                testMethod.tunnelHighFlows.remove(flow)
+                oldFlows.append(flow)
+        for flow in oldFlows:
+            testMethod.tunnelHighFlows.remove(flow)
+        
+        oldFlows = []
         for flow in testMethod.tunnelLowFlows:
             if len(flow) == 5:
                 testMethod.tunnelLowUse -= flow[1]
                 testMethod.tunnelLowSum -= flow[0]
-                testMethod.tunnelLowFlows.remove(flow)
-
+                oldFlows.append(flow)
+        for flow in oldFlows:
+            testMethod.tunnelLowFlows.remove(flow)
 
     def queueAllocation(self, testMethod): 
         testMethod.schedulerData[3] = 0
-
-        sum_teste = 0
 
         for flow in testMethod.schedulerData[2]:
             if len(flow) == 4:
@@ -74,19 +78,13 @@ class MethodsSimulator:
                     testMethod.schedulerData[3] += flow[1]
                     continue
 
-            sum_teste += flow[1]
-
-            print(flow[4])
-
             if isinstance(testMethod, DeMONS):
                 testMethod.selectiveFlowAllocation(flow[2], flow[0], flow[1], flow[3], flow[4])
             elif isinstance(testMethod, VGuard):
                 testMethod.flowAllocation(flow[2], flow[0], flow[1], flow[3], flow[4])
 
         testMethod.schedulerData[1] = 0
-        testMethod.schedulerData[2] = []  
-        print("---> ", sum_teste)
-
+        testMethod.schedulerData[2] = []
 
     def lowTunnelSatisfaction(self, testMethod):
         if testMethod.tunnelLowUse != 0:
@@ -337,19 +335,9 @@ class MethodsSimulator:
                         outputFile.write('\nSecond: ' + str(seconds) + ' Traffic: ' + str(data.replace('\n', '')) + "\n")
                     seconds += 1
                 else:
-
-                    print(testMethod.tunnelLowUse)
-                    print(testMethod.tunnelHighUse, "\n--")
-
+                    
                     #Inserting flows from the queue into the low-priority tunnel to compete for resources
                     self.queueAllocation(testMethod)
-
-                    if seconds == 4:
-                        self.removeDeadFlows(testMethod)
-
-                        print(testMethod.tunnelLowUse)
-                        print(testMethod.tunnelHighUse, "\n")
-                        exit()
 
                     nonQueuedData = len(testMethod.tunnelLowFlows)
                     testMethod.tunnelLowFilter(filterMechanism, filterPolicy)
