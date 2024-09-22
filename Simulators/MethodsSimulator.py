@@ -312,7 +312,6 @@ class MethodsSimulator:
     # reportInterval: calculate evaluation metrics at X seconds of the simulation (1 -> second by second; 2 -> 2 by 2 seconds; ...)
     # filterMechanism: filter mechanism ID for the low priority tunnel [0: Method Std; 1: Token Bucket Policer; 2: Leaky Bucket Shaper; 3..: Leaky Bucket Shaper + Priority Filter]
     # filterPolicy: filter policy ID (sometimes not required) [0: Restrictive; 1: Medium; 2: Permissive]
-    #TODO: A FILA NÃO ESTÁ SENDO 100% APROVEITADA EM CENÁRIOS DE SOBRECARGA -- VERIFICAR O QUE PODE ESTAR GERANDO ESSE FENOMENO
     def simulationBySecond(self, trafficFilePath, testMethod, reportInterval = 1, filterMechanism = 0, filterPolicy = 0, outputFile = None):
         seconds = 1
         inputData = open(trafficFilePath, 'r')
