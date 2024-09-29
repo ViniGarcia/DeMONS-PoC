@@ -181,9 +181,9 @@ def leakyBucketPriorityShapper(testMethod, rate, policy):
 			if tunnelDropRate <= 0:
 				break
 
-			if tunnelDropRate <= queueFree:			#This strategy allows the queue to be fully utilized when there is enough memory to handle all incoming traffic (this may be controversial, as policers will not take effect in such cases)
-				dropFactor = 0						#Enqueuing all traffic may not be a good idea during an attack.
-			elif policy == 0:
+			#if tunnelDropRate <= queueFree:			#This strategy allows the queue to be fully utilized when there is enough memory to handle all incoming traffic (this may be controversial, as policers will not take effect in such cases)
+			#	dropFactor = 0							#Enqueuing all traffic may not be a good idea during an attack.
+			if policy == 0:
 				dropFactor = ((1 - flow[0]) + (((1 - flow[0]) + (flow[0] * 0.1)) * (tunnelDropRate / totalTunnelDrop)))
 			elif policy == 1:
 				dropFactor = (1-flow[0]) + (flow[0]*0.1)
