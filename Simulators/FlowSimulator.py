@@ -11,7 +11,9 @@ class FlowSimulator:
         self.__flowsIDs = {'N100/30-1':self.__getFunction_100_0_30_F1,#
                     'N100/30-2':self.__getFunction_100_0_30_F2,#
                     'N500/30':self.__getFunction_500_0_30,#
+                    'N1500/30':self.__getFunction_1500_0_30,#
                     'D500/10':self.__getFunctionDDoS_500_10,#
+                    'D5000/10':self.__getFunctionDDoS_5000_10,#
                     'P20/40/30':self.__getFunctionRandomPeaks_20_40_30,#
                     'P120/150/30':self.__getFunctionRandomPeaks_120_150_30,#
                     'P200/500/30':self.__getFunctionRandomPeaks_200_500_30,#
@@ -36,8 +38,17 @@ class FlowSimulator:
             traffic.append(round(135*x/2 - 9*math.pow(x,2)/4, 0) * 1000)
         return traffic
 
+    def __getFunction_1500_0_30(self):
+        traffic = []
+        for x in range(1,31):
+            traffic.append(round(200*x - 20*math.pow(x,2)/3, 0) * 1000)
+        return traffic
+
     def __getFunctionDDoS_500_10(self):
         return [500000]*10 + [0]
+
+    def __getFunctionDDoS_5000_10(self):
+        return [5000000]*10 + [0]
 
     def __getFunctionRandomPeaks_20_40_30(self):
         traffic = []
